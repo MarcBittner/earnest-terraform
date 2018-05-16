@@ -1,0 +1,55 @@
+###########################################################################
+#allow all ingress security group
+resource "aws_security_group" "allow_all" {
+  name        = "${terraform.workspace}-allow_all"
+  description = "Allow all inbound traffic"
+  vpc_id      = "${aws_vpc.this.id}"
+
+  ingress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+}
+
+#OUTPUTS
+output "aws_security_group.allow_all.id" {
+  value = "${aws_security_group.allow_all.id}"
+}
+
+###########################################################################
+#allow all within vpc
+resource "aws_security_group" "allow_all_within_vpc" {
+  name        = "${terraform.workspace}-allow_all_within_vpc"
+  description = "Allow all inbound traffic within vpc"
+  vpc_id      = "${aws_vpc.this.id}"
+
+  ingress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["${aws_vpc.this.cidr_block}"]
+  }
+
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["${aws_vpc.this.cidr_block}"]
+  }
+
+}
+
+#OUTPUTS
+output "aws_security_group.allow_all_within_vpc.id" {
+  value = "${aws_security_group.allow_all_within_vpc.id}"
+}
