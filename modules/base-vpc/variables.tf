@@ -16,12 +16,12 @@ variable "number-to-letter-mapping" {
   type = "map"
 
   default = {
-    "1" = "a"
-    "2" = "b"
-    "3" = "c"
-    "4" = "d"
-    "5" = "e"
-    "6" = "f"
+    "0" = "a"
+    "1" = "b"
+    "2" = "c"
+    "3" = "d"
+    "4" = "e"
+    "5" = "f"
   }
 }
 
@@ -30,6 +30,46 @@ variable "region" {}
 variable "name" {}
 
 variable "private_subnet_tags" {
+  type = "map"
+
+  default = {
+    "kubernetes.io/cluster/default" = "shared"
+  }
+}
+
+variable "public_subnet_tags" {
+  type = "map"
+
+  default = {
+    "kubernetes.io/cluster/default" = "shared"
+  }
+}
+
+variable "public_nat_subnet_tags" {
+  type = "map"
+
+  default = {
+    "kubernetes.io/cluster/default" = "shared"
+  }
+}
+
+variable "private_elb_subnet_tags" {
+  type = "map"
+
+  default = {
+    "kubernetes.io/cluster/default" = "shared"
+  }
+}
+
+variable "private_tooling_subnet_tags" {
+  type = "map"
+
+  default = {
+    "kubernetes.io/cluster/default" = "shared"
+  }
+}
+
+variable "fortknox_subnet_tags" {
   type = "map"
 
   default = {

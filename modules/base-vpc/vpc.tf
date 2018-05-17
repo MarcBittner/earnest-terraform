@@ -8,7 +8,6 @@ resource "aws_vpc" "this" {
 }
 
 #Outputs
-
 output "vpc.id" {
   value = "${aws_vpc.this.id}"
 }
@@ -26,49 +25,21 @@ resource "aws_vpc_endpoint" "s3" {
 }
 
 #private associations
-resource "aws_vpc_endpoint_route_table_association" "private_a_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.private_a.id}"
-}
+resource "aws_vpc_endpoint_route_table_association" "private" {
+  count = "${var.region-az-count-mapping[var.region]}"
 
-resource "aws_vpc_endpoint_route_table_association" "private_b_s3" {
   vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.private_b.id}"
-}
-
-resource "aws_vpc_endpoint_route_table_association" "private_c_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.private_c.id}"
+  route_table_id  = "${aws_route_table.private.*.id[count.index]}"
 }
 
 #public associations
-resource "aws_vpc_endpoint_route_table_association" "public_a_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.public.id}"
-}
-
-resource "aws_vpc_endpoint_route_table_association" "public_b_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.public.id}"
-}
-
-resource "aws_vpc_endpoint_route_table_association" "public_c_s3" {
+resource "aws_vpc_endpoint_route_table_association" "public" {
   vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
   route_table_id  = "${aws_route_table.public.id}"
 }
 
 #fort knox associations
-resource "aws_vpc_endpoint_route_table_association" "fort_knox_a_s3" {
+resource "aws_vpc_endpoint_route_table_association" "fortknox" {
   vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.fort_knox_a.id}"
-}
-
-resource "aws_vpc_endpoint_route_table_association" "fort_knox_b_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.fort_knox_b.id}"
-}
-
-resource "aws_vpc_endpoint_route_table_association" "fort_knox_c_s3" {
-  vpc_endpoint_id = "${aws_vpc_endpoint.s3.id}"
-  route_table_id  = "${aws_route_table.fort_knox_c.id}"
+  route_table_id  = "${aws_route_table.fortknox.id}"
 }
