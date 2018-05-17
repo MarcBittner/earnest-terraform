@@ -3,8 +3,10 @@ locals {
     "kubernetes.io/role/internal-elb" = 1
   }
   
+  private_elb_subnets_block  = "${var.cidr_base}.224.0/22"
+  private_tooling_subnets_block  = "${var.cidr_base}.208.0/22"
   private_subnets_block  = "${var.cidr_base}.0.0/17"
-  private_subnets_block  = "${var.cidr_base}.0.0/17"
+  public_nat_subnets_block   = "${var.cidr_base}.240.0/23"
   public_subnets_block   = "${var.cidr_base}.128.0/18"
   fortknox_subnets_block = "${var.cidr_base}.192.0/20"
 }
@@ -35,6 +37,32 @@ output "subnets.public.availability_zones" {
   value = ["${aws_subnet.public.*.availability_zone}"]
 }
 
+################
+# Public nat subnets
+################
+resource "aws_subnet" "public_nat" {
+  count      = "${var.region-az-count-mapping[var.region]}"
+  vpc_id     = "${aws_vpc.this.id}"
+  cidr_block = "${cidrsubnet(local.public_nat_subnets_block, ceil(pow(var.region-az-count-mapping[var.region],0.5)), count.index - 1)}"
+
+  availability_zone       = "${var.region}${var.number-to-letter-mapping[count.index]}"
+  map_public_ip_on_launch = "true"
+  tags = "${merge(local.public_nat_subnet_tags, var.public_nat_subnet_tags, map("Name", "${var.name}-public-nat-${var.number-to-letter-mapping[count.index]}"))}"
+}
+
+}
+
+#outputs
+################
+
+output "subnets.public_nat.ids" {
+  value = ["${aws_subnet.public_nat.*.id}"]
+}
+
+output "subnets.public_nat.availability_zones" {
+  value = ["${aws_subnet.public_nat.*.availability_zone}"]
+}
+
 #################
 # Private subnets
 #################
@@ -56,6 +84,52 @@ output "subnets.private.ids" {
 
 output "subnets.private.availability_zones" {
   value = ["${aws_subnet.private.*.availability_zone}"]
+}
+
+#################
+# Private ELB subnets
+#################
+resource "aws_subnet" "private_elb" {
+  count      = "${var.region-az-count-mapping[var.region]}"
+  vpc_id     = "${aws_vpc.this.id}"
+  cidr_block = "${cidrsubnet(local.private_elb_subnets_block, ceil(pow(var.region-az-count-mapping[var.region],0.5)), count.index - 1)}"
+
+  availability_zone       = "${var.region}${var.number-to-letter-mapping[count.index]}"
+  map_public_ip_on_launch = "false"
+  tags = "${merge(local.private_elb_subnet_tags, var.private_elb_subnet_tags, map("Name", "${var.name}-private-elb-${var.number-to-letter-mapping[count.index]}"))}"
+}
+
+#outputs
+################
+output "subnets.private_elb.ids" {
+  value = ["${aws_subnet.private_elb.*.id}"]
+}
+
+output "subnets.private_elb.availability_zones" {
+  value = ["${aws_subnet.private_elb.*.availability_zone}"]
+}
+
+#################
+# Private tooling subnets
+#################
+resource "aws_subnet" "private_tooling" {
+  count      = "${var.region-az-count-mapping[var.region]}"
+  vpc_id     = "${aws_vpc.this.id}"
+  cidr_block = "${cidrsubnet(local.private_tooling_subnets_block, ceil(pow(var.region-az-count-mapping[var.region],0.5)), count.index - 1)}"
+
+  availability_zone       = "${var.region}${var.number-to-letter-mapping[count.index]}"
+  map_public_ip_on_launch = "false"
+  tags = "${merge(local.private_tooling_subnet_tags, var.private_tooling_subnet_tags, map("Name", "${var.name}-private-tooling-${var.number-to-letter-mapping[count.index]}"))}"
+}
+
+#outputs
+################
+output "subnets.private_tooling.ids" {
+  value = ["${aws_subnet.private_tooling.*.id}"]
+}
+
+output "subnets.private_tooling.availability_zones" {
+  value = ["${aws_subnet.private_tooling.*.availability_zone}"]
 }
 
 ##################
@@ -97,11 +171,7 @@ resource "aws_db_subnet_group" "private_database" {
   name        = "${var.name}_private_database"
   description = "${var.name} private db subnet group"
 
-  subnet_ids = [
-    "${aws_subnet.private_a.id}",
-    "${aws_subnet.private_b.id}",
-    "${aws_subnet.private_c.id}",
-  ]
+  subnet_ids = ["${aws_subnet.private.*.id}"]
 }
 
 output "aws_db_subnet_group.private_database.id" {
