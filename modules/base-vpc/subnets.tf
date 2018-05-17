@@ -2,13 +2,14 @@ locals {
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" = 1
   }
-  
-  private_elb_subnets_block  = "${var.cidr_base}.224.0/22"
-  private_tooling_subnets_block  = "${var.cidr_base}.208.0/22"
+ 
+  #This leaves an additional ~9,900 ip addresses within the vpc 
   private_subnets_block  = "${var.cidr_base}.0.0/17"
-  public_nat_subnets_block   = "${var.cidr_base}.240.0/23"
   public_subnets_block   = "${var.cidr_base}.128.0/18"
   fortknox_subnets_block = "${var.cidr_base}.192.0/20"
+  private_elb_subnets_block  = "${var.cidr_base}.212.0/22"
+  private_tooling_subnets_block  = "${var.cidr_base}.208.0/22"
+  public_nat_subnets_block   = "${var.cidr_base}.216.0/23"
 }
 
 ################
