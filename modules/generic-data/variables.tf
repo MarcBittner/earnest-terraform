@@ -17,7 +17,7 @@ variable "environment-region-mapping" {
   }
 }
 
-variable "short-to-long-name-mapping" {
+variable "environment-short-to-long-name-mapping" {
   type = "map"
 
   default = {
