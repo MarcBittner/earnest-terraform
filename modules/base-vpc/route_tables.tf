@@ -111,11 +111,11 @@ resource "aws_route_table_association" "public" {
   route_table_id = "${aws_route_table.public.id}"
 }
 
-resource "aws_route_table_association" "public_elb" {
+resource "aws_route_table_association" "public_nat" {
   count = "${var.region-az-count-mapping[var.region]}"
 
-  subnet_id      = "${aws_subnet.public_elb.*.id[count.index]}"
-  route_table_id = "${aws_route_table.public_elb.id}"
+  subnet_id      = "${aws_subnet.public_nat.*.id[count.index]}"
+  route_table_id = "${aws_route_table.public_nat.id}"
 }
 
 # Fort knox associations
