@@ -26,10 +26,6 @@ variable "cookbooks_url" {
   description = "The cookbooks repository url"
 }
 
-variable "cookbooks_ssh_key" {
-  description = "The cookbooks repository ssh key"
-}
-
 variable "cookbooks_revision" {
   description = "The cookbooks branch being used i.e. master"
 }
@@ -40,6 +36,10 @@ variable "custom_json" {
 
 variable "default_subnet_id" {
   description = "The default subnet id"
+}
+
+data "aws_ssm_parameter" "cookbooks_key" {
+  name = "/Terraform/OpsWorks/ring-cookbooks-${var.chef_version}"
 }
 
 resource "aws_opsworks_stack" "stack" {
@@ -58,7 +58,7 @@ resource "aws_opsworks_stack" "stack" {
   custom_cookbooks_source {
     type     = "git"
     url      = "${var.cookbooks_url}"
-    ssh_key  = "${var.cookbooks_ssh_key}"
+    ssh_key  = "${trimspace(base64decode(data.aws_ssm_parameter.cookbooks_key.value))}"
     revision = "${var.cookbooks_revision}"
   }
 
