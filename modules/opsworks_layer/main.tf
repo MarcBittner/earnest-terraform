@@ -19,6 +19,11 @@ variable "use_ebs" {
   default     = false
 }
 
+variable "security_groups" {
+  description = "A list of security group IDs to trust"
+  type        = "list"
+}
+
 variable "instance_shutdown_timeout" {
   description = "The time in seconds that OpsWorks will wait for Chef after triggering shutdown"
   default     = 120
@@ -73,6 +78,11 @@ variable "enabled" {
   default = 1
 }
 
+variable "logging_volume_size" {
+  description = "Defaults to 20 GB"
+  default     = 20
+}
+
 resource "aws_opsworks_custom_layer" "layer" {
   count                       = "${var.enabled}"
   name                        = "${var.name}"
@@ -84,12 +94,20 @@ resource "aws_opsworks_custom_layer" "layer" {
   auto_assign_elastic_ips     = "${var.assign_elastic_ips}"
   auto_assign_public_ips      = "${var.assign_public_ips}"
   drain_elb_on_shutdown       = "${var.drain_elb}"
+  custom_security_group_ids   = ["${var.security_groups}"]
+  custom_setup_recipes        = "${var.custom_setup_recipes}"
+  custom_configure_recipes    = "${var.custom_configure_recipes}"
+  custom_deploy_recipes       = "${var.custom_deploy_recipes}"
+  custom_undeploy_recipes     = "${var.custom_undeploy_recipes}"
+  custom_shutdown_recipes     = "${var.custom_shutdown_recipes}"
 
-  custom_setup_recipes     = "${var.custom_setup_recipes}"
-  custom_configure_recipes = "${var.custom_configure_recipes}"
-  custom_deploy_recipes    = "${var.custom_deploy_recipes}"
-  custom_undeploy_recipes  = "${var.custom_undeploy_recipes}"
-  custom_shutdown_recipes  = "${var.custom_shutdown_recipes}"
+  ebs_volume {
+    mount_point     = "/var/log"
+    size            = "${var.logging_volume_size}"
+    number_of_disks = 1
+    raid_level      = "none"
+    type            = "standard"
+  }
 
   lifecycle {
     ignore_changes = [
