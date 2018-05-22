@@ -3,12 +3,12 @@ terraform {
     bucket  = "ring-terraform-practice"
     key     = "implementations/dynamo/terraform-lock-table"
     region  = "us-east-1"
-    profile = "ring-dev"
+    profile = "dev"
   }
 }
 
 provider "aws" {
   alias   = "dev"
-  profile = "ring-dev"
+  profile = "dev"
   region  = "us-east-1"
 }
