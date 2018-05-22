@@ -1,3 +1,13 @@
+variable "environment-profile-mapping" {
+  type = "map"
+
+  default = {
+    "dev"  = "dev-ring"
+    "qa"   = "qa-ring"
+    "prod" = "prod-ring"
+  }
+}
+
 variable "environment-region-mapping" {
   type = "map"
 
