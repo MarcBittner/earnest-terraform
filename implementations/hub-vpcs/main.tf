@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "aws" {
-  profile = "${module.generic-data.environment-profile-mapping[terraform.workspace]}"
+  profile = "${terraform.workspace}"
   region  = "${module.generic-data.environment-region-mapping[terraform.workspace]}"
 }
 
