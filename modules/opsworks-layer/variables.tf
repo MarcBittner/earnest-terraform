@@ -112,6 +112,12 @@ variable "subnets" {
   type        = "list"
 }
 
+# FIXME: Remove (only use for debugging)
+variable "key_name" {
+  description = "Key name for Launch config"
+  default     = ""
+}
+
 variable "stack_name" {
   description = "Name of stack the ASG layer belongs to"
 }

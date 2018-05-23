@@ -10,6 +10,7 @@ data "template_file" "user_data" {
 resource "aws_launch_configuration" "launch_config" {
   count                       = "${var.enabled}"
   name_prefix                 = "lc-${var.name}"
+  key_name                    = "${var.key_name}"
   image_id                    = "${var.image_id}"
   instance_type               = "${var.instance_type}"
   iam_instance_profile        = "${var.iam_instance_profile}"
