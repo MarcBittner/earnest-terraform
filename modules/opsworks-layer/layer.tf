@@ -36,5 +36,5 @@ output "id" {
 }
 
 output "name" {
-  value = "${aws_opsworks_custom_layer.layer.name}"
+  value = "${aws_opsworks_custom_layer.layer.*.name}"
 }
