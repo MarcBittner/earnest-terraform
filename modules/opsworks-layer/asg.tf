@@ -3,7 +3,7 @@ data "template_file" "user_data" {
 
   vars {
     file_name   = "Ring-Spot-latest.tar.gz"
-    bucket_name = "ring-asg"
+    bucket_name = "ring-asg-script"
   }
 }
 
