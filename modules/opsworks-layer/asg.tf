@@ -29,14 +29,14 @@ resource "aws_autoscaling_group" "asg" {
   max_size             = "${var.max_size}"
   min_size             = "${var.min_size}"
   launch_configuration = "${aws_launch_configuration.launch_config.name}"
-  vpc_zone_identifier  = "${var.subnets}"
+  vpc_zone_identifier  = ["${var.subnets}"]
 
   depends_on = ["aws_launch_configuration.launch_config"]
 
   tags = [
     {
       key                 = "opsworks:layer"
-      value               = "${module.layer.}"
+      value               = "${var.name}"
       propagate_at_launch = true
     },
     {
