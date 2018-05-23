@@ -36,7 +36,7 @@ resource "aws_autoscaling_group" "asg" {
   tags = [
     {
       key                 = "opsworks:layer"
-      value               = "${module.layer.}"
+      value               = "${module.layer.name}"
       propagate_at_launch = true
     },
     {
