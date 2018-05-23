@@ -178,14 +178,14 @@ output "subnets.fortknox.availability_zones" {
 ###################
 
 resource "aws_db_subnet_group" "fortknox_database" {
-  name        = "${var.name}_fortknox_database"
+  name        = "${var.name}-fortknox_database"
   description = "${var.name} fortknox db subnet group"
 
   subnet_ids = ["${aws_subnet.fortknox.*.id}"]
 }
 
 resource "aws_db_subnet_group" "private_database" {
-  name        = "${var.name}_private_database"
+  name        = "${var.name}-private_database"
   description = "${var.name} private db subnet group"
 
   subnet_ids = ["${aws_subnet.private.*.id}"]
