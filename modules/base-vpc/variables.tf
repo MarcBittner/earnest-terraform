@@ -26,7 +26,11 @@ variable "number-to-letter-mapping" {
 }
 
 variable "cidr_base" {}
-variable "region" {}
+
+variable "region" {
+  default = "us-east-1"
+}
+
 variable "name" {}
 
 variable "private_subnet_tags" {

@@ -18,7 +18,6 @@ resource "aws_security_group" "allow_all" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 
 #OUTPUTS
@@ -46,10 +45,64 @@ resource "aws_security_group" "allow_all_within_vpc" {
     protocol    = "-1"
     cidr_blocks = ["${aws_vpc.this.cidr_block}"]
   }
-
 }
 
 #OUTPUTS
 output "aws_security_group.allow_all_within_vpc.id" {
   value = "${aws_security_group.allow_all_within_vpc.id}"
+}
+
+#########################################################################
+resource "aws_security_group" "qualys_sg" {
+  name   = "qualys-sg"
+  vpc_id = "${aws_vpc.this.id}"
+
+  ingress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    self      = true
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+output "aws_security_group.qualys_sg.id" {
+  value = "${aws_security_group.qualys_sg.id}"
+}
+
+#######################################################################
+resource "aws_security_group" "ring_jumphost_sg" {
+  name   = "ring-jumphost"
+  vpc_id = "${aws_vpc.this.id}"
+
+  ingress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    security_groups = ["${aws_security_group.qualys_sg.id}"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+output "aws_security_group.ring_jumphost_sg.id" {
+  value = "${aws_security_group.ring_jumphost_sg.id}"
 }

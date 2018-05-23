@@ -1,5 +1,5 @@
 provider "aws" {
-  alias = "dev"
-  profile = "ring-dev"
-  region = "us-east-1"
+  alias   = "ring-it"
+  profile = "ring-it"
+  region  = "us-east-1"
 }

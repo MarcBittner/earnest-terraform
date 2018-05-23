@@ -1,6 +1,6 @@
 data "terraform_remote_state" "vpc" {
   bucket = "slkdjfasldkf"
-  path = "env:/${terraform.workspace}/implementations/hub-vpcs
+  path   = "env:/${terraform.workspace}/implementations/hub-vpcs"
 }
 
 aws_asg "artifactory" {
