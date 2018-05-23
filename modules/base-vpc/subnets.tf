@@ -206,6 +206,10 @@ resource "aws_elasticache_subnet_group" "fortknox_elasticache" {
   subnet_ids = ["${aws_subnet.fortknox.*.id}"]
 }
 
+output "aws_elasticache_subnet_group.fortknox_elasticache.id" {
+  value = "${aws_elasticache_subnet_group.fortknox_elasticache.id}"
+}
+
 resource "aws_elasticache_subnet_group" "private_elasticache" {
   name        = "${var.name}_private_elasticache"
   description = "${var.name} private elasticache subnet group"
