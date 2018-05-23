@@ -200,7 +200,7 @@ output "aws_db_subnet_group.private_database.id" {
 ###################
 
 resource "aws_elasticache_subnet_group" "fortknox_elasticache" {
-  name        = "${var.name}_fortknox_elasticache"
+  name        = "${var.name}-fortknox-elasticache"
   description = "${var.name} fortknox elasticache subnet group"
 
   subnet_ids = ["${aws_subnet.fortknox.*.id}"]
@@ -211,7 +211,7 @@ output "aws_elasticache_subnet_group.fortknox_elasticache.id" {
 }
 
 resource "aws_elasticache_subnet_group" "private_elasticache" {
-  name        = "${var.name}_private_elasticache"
+  name        = "${var.name}-private-elasticache"
   description = "${var.name} private elasticache subnet group"
 
   subnet_ids = ["${aws_subnet.private.*.id}"]
