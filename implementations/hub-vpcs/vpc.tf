@@ -1,7 +1,7 @@
 module "vpc" {
   source    = "../../modules/base-vpc/"
   name      = "${terraform.workspace}"
-  region    = "${join("-", slice(split("-", terraform.workspace), 1, length(split("-", terraform.workspace))))}"
+  region    = "${local.region}"
   cidr_base = "10.99"
 
   private_subnet_tags = {

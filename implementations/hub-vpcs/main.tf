@@ -9,12 +9,13 @@ terraform {
 }
 
 locals {
-  env = "${element(split("-", terraform.workspace), 0)}"
+  env    = "${element(split("-", terraform.workspace), 0)}"
+  region = "${join("-", slice(split("-", terraform.workspace), 1, length(split("-", terraform.workspace))))}"
 }
 
 provider "aws" {
   profile = "${module.generic-data.environment-profile-mapping[local.env]}"
-  region  = "${module.generic-data.environment-region-mapping[local.env]}"
+  region  = "${local.region}"
 }
 
 module "generic-data" {
