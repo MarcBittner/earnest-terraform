@@ -1,13 +1,4 @@
 #!/bin/bash
-
-mkdir ~/.ssh
-chmod 700 ~/.ssh
-touch ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHW6RkWhuR1XcLtM4Q4RRpvsi0pSU/6ChYTlAnlNx2jpCWQhubxYO80wEgNxBeP+KSrh63jVhwaRF+REYeGMiqGBjFliiJCGvo9NvW9lf4nWgY1sMjVDhoF1+pJDwKj/hyqgV4LNL/2nosUaSCvsGlzrwFvYsVLY+AKQlnobloDPizDX6Cx0rSfvE+MdZterXvdBuIGpC0J8mQDwfq+OHmLKVt/P4OGx+qSO+g8pfGBvG+9PirDGwsV/EbdOnnvALXJafudrLvNJJ5u4iWe1zTQDUHx4uNeV5vNd8Hmd9y15c2Q4gQ0vEfZnFwLKf5Q0wZNE+5RH/+8DDAoy1NSJ5l rss@testing" >> ~/.ssh/authorized_keys
-apt-get install -y redis-cli
-
-
 FILE=${file_name}
 
 /usr/local/bin/aws s3 cp s3://${bucket_name}/$FILE /tmp/
