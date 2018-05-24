@@ -1,3 +1,3 @@
 output "redis_endpoint" {
-  value = "${aws_elasticache_replication_group.redis.primary_endpoint_address}"
+  value = "${aws_elasticache_replication_group.redis.configuration_endpoint_address}"
 }
