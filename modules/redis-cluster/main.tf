@@ -1,16 +1,26 @@
 resource "aws_security_group" "redis" {
+  name = "${var.name}"
+
   vpc_id = "${var.vpc_id}"
+
+  ingress {
+    from_port       = "6379"
+    to_port         = "6379"
+    protocol        = "tcp"
+    security_groups = ["${var.qualsys_sg_id}"]
+  }
+
+  ingress {
+    from_port = "6379"
+    to_port   = "6379"
+    protocol  = "tcp"
+    self      = true
+  }
 
   tags {
     Name = "${var.name}"
   }
 }
-
-# resource "aws_elasticache_subnet_group" "default" {
-#   name        = "subnet-group-${var.name}"
-#   description = "Private subnets for ElastiCache instances"
-#   subnet_ids  = ["${split(",", var.private_subnet_ids)}"]
-# }
 
 resource "aws_elasticache_replication_group" "redis" {
   replication_group_id          = "${var.name}"
