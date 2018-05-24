@@ -27,13 +27,16 @@ resource "aws_elasticache_replication_group" "redis" {
   replication_group_description = "${var.name}-redis-cluster"
   engine                        = "redis"
   engine_version                = "${var.engine_version}"
+  snapshot_retention_limit      = "${var.snapshot_retention_limit}"
+  snapshot_window               = "${var.snapshot_window}"
   maintenance_window            = "${var.maintenance_window}"
-  automatic_failover_enabled    = true
 
   cluster_mode {
     replicas_per_node_group = 2
     num_node_groups         = "${var.node_count[var.environment]}"
   }
+
+  automatic_failover_enabled = true
 
   node_type            = "${var.node_type[var.environment]}"
   parameter_group_name = "${var.parameter_group_name}"

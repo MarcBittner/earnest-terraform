@@ -37,7 +37,15 @@ variable "node_count" {
 }
 
 variable "maintenance_window" {
-  default = "sun:05:00-sun:06:00"
+  default = "sun:01:00-sun:03:00"
+}
+
+variable "snapshot_retention_limit" {
+  default = "1"
+}
+
+variable "snapshot_window" {
+  default = "03:00-04:00"
 }
 
 variable "qualsys_sg_id" {
