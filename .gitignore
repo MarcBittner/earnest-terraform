@@ -2,3 +2,4 @@
 .terraform/
 *.backup
 *.tfstate
+.DS_Store
