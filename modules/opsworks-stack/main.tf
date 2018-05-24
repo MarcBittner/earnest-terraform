@@ -153,7 +153,7 @@ resource "aws_iam_role_policy" "instance_role_policy" {
         "s3:GetObject"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:s3:::ring-asg/*"
+      "Resource": "arn:aws:s3:::ring-asg-script/*"
     },
     {
       "Action": [
