@@ -1,5 +1,9 @@
-variable "name" {
+variable "stack_name" {
   description = "The name of the stack"
+}
+
+variable "full_name" {
+  description = "The full name of the service"
 }
 
 variable "vpc_id" {
@@ -12,10 +16,6 @@ variable "region" {
 
 variable "environment" {
   description = "The environment i.e. dev, qa, prod"
-}
-
-variable "project" {
-  description = "The project name for the OpsWorks stack"
 }
 
 variable "chef_version" {
@@ -43,7 +43,7 @@ data "aws_ssm_parameter" "cookbooks_key" {
 }
 
 resource "aws_opsworks_stack" "stack" {
-  name                          = "${format("%s-%s", var.project, var.environment)}"
+  name                          = "${format("%s-%s", var.name, var.environment)}"
   region                        = "${var.region}"
   service_role_arn              = "${aws_iam_role.stack_role.arn}"
   default_instance_profile_arn  = "${aws_iam_instance_profile.default_instance_profile.arn}"
@@ -63,16 +63,16 @@ resource "aws_opsworks_stack" "stack" {
   }
 
   tags {
-    Name    = "${var.name}"
+    Name    = "${var.full_name}"
     Env     = "${var.environment}"
-    Project = "${var.project}"
+    Project = "${var.stack_name}"
   }
 
   custom_json = "${var.custom_json}"
 }
 
 resource "aws_iam_role" "stack_role" {
-  name_prefix = "${format("%s%sStackRole", join("",split(" ",var.name)), title(var.environment))}"
+  name_prefix = "${format("%s%sStackRole", join("",split(" ",var.full_name)), title(var.environment))}"
 
   assume_role_policy = <<EOF
 {
@@ -92,7 +92,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "default_stack_role_policy" {
-  name_prefix = "${format("%s%sStackRolePolicy", join("",split(" ",var.name)), title(var.environment))}"
+  name_prefix = "${format("%s%sStackRolePolicy", join("",split(" ",var.full_name)), title(var.environment))}"
   role        = "${aws_iam_role.stack_role.id}"
 
   policy = <<EOF
@@ -116,12 +116,12 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "default_instance_profile" {
-  name_prefix = "${format("%s%sInstanceProfile", join("",split(" ",var.name)), title(var.environment))}"
+  name_prefix = "${format("%s%sInstanceProfile", join("",split(" ",var.full_name)), title(var.environment))}"
   role        = "${aws_iam_role.default_instance_role.name}"
 }
 
 resource "aws_iam_role" "default_instance_role" {
-  name_prefix = "${format("%s%sInstanceRole", join("",split(" ",var.name)), title(var.environment))}"
+  name_prefix = "${format("%s%sInstanceRole", join("",split(" ",var.full_name)), title(var.environment))}"
 
   assume_role_policy = <<EOF
 {
@@ -141,7 +141,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "instance_role_policy" {
-  name_prefix = "${format("%s%sInstanceRolePolicy", join("",split(" ",var.name)), title(var.environment))}"
+  name_prefix = "${format("%s%sInstanceRolePolicy", join("",split(" ",var.full_name)), title(var.environment))}"
   role        = "${aws_iam_role.default_instance_role.id}"
 
   policy = <<EOF
