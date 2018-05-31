@@ -5,10 +5,14 @@ resource "aws_vpc" "this" {
   cidr_block           = "${var.cidr_base}.0.0/16"
   enable_dns_hostnames = "true"
   enable_dns_support   = "true"
+
+  tags {
+    Name = "${var.name}"
+  }
 }
 
 #Outputs
-output "vpc.id" {
+w output "vpc.id" {
   value = "${aws_vpc.this.id}"
 }
 
