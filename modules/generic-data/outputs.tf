@@ -17,3 +17,7 @@ output "env" {
 output "region" {
   value = "${join("-", slice(split("-", terraform.workspace), 1, length(split("-", terraform.workspace))))}"
 }
+
+output "region-elb-account-mapping" {
+  value = "${var.region-elb-account-mapping}"
+}
