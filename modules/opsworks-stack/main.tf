@@ -43,7 +43,7 @@ data "aws_ssm_parameter" "cookbooks_key" {
 }
 
 resource "aws_opsworks_stack" "stack" {
-  name                          = "${format("%s-%s", var.name, var.environment)}"
+  name                          = "${format("%s-%s", var.stack_name, var.environment)}"
   region                        = "${var.region}"
   service_role_arn              = "${aws_iam_role.stack_role.arn}"
   default_instance_profile_arn  = "${aws_iam_instance_profile.default_instance_profile.arn}"
