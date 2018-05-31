@@ -12,7 +12,7 @@ resource "aws_vpc" "this" {
 }
 
 #Outputs
-w output "vpc.id" {
+output "vpc.id" {
   value = "${aws_vpc.this.id}"
 }
 
