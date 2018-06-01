@@ -12,7 +12,7 @@ locals {
 }
 
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "${var.name}"
+  name           = "${format("%s-%s", var.name, module.generic-data.env)}"
   read_capacity  = "${var.read_capacity}"
   write_capacity = "${var.write_capacity}"
   hash_key       = "${var.hash_key}"
