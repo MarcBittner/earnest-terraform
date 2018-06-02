@@ -2,6 +2,10 @@ variable "name" {
   description = "The name of the dynamo db table"
 }
 
+variable "environment" {
+  description = "The current environment i.e. dev, qa, prod, etc"
+}
+
 variable "read_capacity" {
   description = "The read capacity of the dynamo db table"
 }
@@ -18,7 +22,7 @@ variable "range_key" {
   description = "The sort key used for searching within a partition"
 }
 
-variable "enabled_encryption" {
+variable "enable_encryption" {
   description = "Whether encryption is enabled"
   default     = false
 }

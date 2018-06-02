@@ -12,13 +12,13 @@ locals {
 }
 
 resource "aws_dynamodb_table" "basic-dynamodb-table" {
-  name           = "${format("%s-%s", var.name, module.generic-data.env)}"
+  name           = "${format("%s-%s", var.name, var.environment)}"
   read_capacity  = "${var.read_capacity}"
   write_capacity = "${var.write_capacity}"
   hash_key       = "${var.hash_key}"
   range_key      = "${var.range_key}"
 
-  attribute = ["${var.attributes}"]
+  attribute = ["${local.attributes}"]
 
   server_side_encryption {
     enabled = "${var.enable_encryption}"
@@ -33,7 +33,7 @@ resource "aws_dynamodb_table" "basic-dynamodb-table" {
   local_secondary_index  = ["${var.local_secondary_indexes}"]
 
   tags {
-    Name        = "${var.name}-${module.generic-data.env}"
-    Environment = "${module.generic-data.env}"
+    Name        = "${format("%s-%s", var.name, var.environment)}"
+    Environment = "${var.environment}"
   }
 }
