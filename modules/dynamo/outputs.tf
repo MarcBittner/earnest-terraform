@@ -1,7 +1,7 @@
-output "table_arn" {
+output "arn" {
   value = "${aws_dynamodb_table.this.arn}"
 }
 
-output "table_id" {
+output "id" {
   value = "${aws_dynamodb_table.this.id}"
 }
