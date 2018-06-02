@@ -10,9 +10,12 @@ locals {
     "${var.additional_attributes}",
   ]
 
-  tags = "${map(
+  tags = "${merge(
+    map(
     "Name", "${format("%s-%s", var.name, var.environment)}",
-    ""
+    "Environment", "${var.environment}"
+    ),
+    "${var.tags}"
   )}"
 }
 
@@ -37,8 +40,5 @@ resource "aws_dynamodb_table" "this" {
   global_secondary_index = ["${var.global_secondary_indexes}"]
   local_secondary_index  = ["${var.local_secondary_indexes}"]
 
-  tags {
-    Name        = "${format("%s-%s", var.name, var.environment)}"
-    Environment = "${var.environment}"
-  }
+  tags = "${local.tags}"
 }

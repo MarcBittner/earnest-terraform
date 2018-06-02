@@ -54,3 +54,9 @@ variable "local_secondary_indexes" {
   default     = []
   description = "List of local secondary indexes"
 }
+
+variable "tags" {
+  type        = "map"
+  default     = {}
+  description = "Map of tags for the table"
+}
