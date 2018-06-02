@@ -9,9 +9,14 @@ locals {
     },
     "${var.additional_attributes}",
   ]
+
+  tags = "${map(
+    "Name", "${format("%s-%s", var.name, var.environment)}",
+    ""
+  )}"
 }
 
-resource "aws_dynamodb_table" "basic-dynamodb-table" {
+resource "aws_dynamodb_table" "this" {
   name           = "${format("%s-%s", var.name, var.environment)}"
   read_capacity  = "${var.read_capacity}"
   write_capacity = "${var.write_capacity}"
