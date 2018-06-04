@@ -1,11 +1,12 @@
 locals {
-  attributes = [{
-    name = "${var.hash_key}"
-    type = "S"
-  },
+  attributes = [
+    {
+      name = "${var.hash_key}"
+      type = "${var.hash_key_type}"
+    },
     {
       name = "${var.range_key}"
-      type = "S"
+      type = "${var.range_key_type}"
     },
     "${var.additional_attributes}",
   ]

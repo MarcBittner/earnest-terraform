@@ -20,8 +20,18 @@ variable "hash_key" {
   description = "The partition key that is used to partition data"
 }
 
+variable "hash_key_type" {
+  description = "The type of the partition key (S, N, or B)"
+  default     = "S"
+}
+
 variable "range_key" {
   description = "The sort key used for searching within a partition"
+}
+
+variable "range_key_type" {
+  description = "The type of the sort key (S, N, or B)"
+  default     = "S"
 }
 
 variable "enable_encryption" {
