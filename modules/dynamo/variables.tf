@@ -30,8 +30,8 @@ variable "enable_encryption" {
 }
 
 variable "additional_attributes" {
-  description = "List of additional table attributes and their types"
   type        = "list"
+  description = "List of additional table attributes and their types"
   default     = []
 }
 
@@ -47,18 +47,18 @@ variable "ttl_enabled" {
 
 variable "global_secondary_indexes" {
   type        = "list"
-  default     = []
   description = "List of global secondary indexes"
+  default     = []
 }
 
 variable "local_secondary_indexes" {
   type        = "list"
-  default     = []
   description = "List of local secondary indexes"
+  default     = []
 }
 
 variable "tags" {
   type        = "map"
-  default     = {}
   description = "Map of tags for the table"
+  default     = {}
 }
