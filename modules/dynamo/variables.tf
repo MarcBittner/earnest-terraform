@@ -39,6 +39,11 @@ variable "enable_encryption" {
   default     = false
 }
 
+variable "enable_backups" {
+  description = "Whether backup is enabled"
+  default     = true
+}
+
 variable "additional_attributes" {
   type        = "list"
   description = "List of additional table attributes and their types"

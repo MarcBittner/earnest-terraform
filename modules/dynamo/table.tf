@@ -33,6 +33,10 @@ resource "aws_dynamodb_table" "this" {
     enabled = "${var.enable_encryption}"
   }
 
+  point_in_time_recovery {
+    enabled = "${var.enable_backups}"
+  }
+
   ttl {
     attribute_name = "${var.ttl_attribute_name}"
     enabled        = "${var.ttl_enabled}"
