@@ -1,5 +1,7 @@
 *.swp
-.terraform/
 *.backup
-*.tfstate
 .DS_Store
+
+*.tfvars
+*.tfstate
+.terraform/
