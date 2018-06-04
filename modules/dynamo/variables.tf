@@ -8,10 +8,12 @@ variable "environment" {
 
 variable "read_capacity" {
   description = "The read capacity of the dynamo db table"
+  default     = 5
 }
 
 variable "write_capacity" {
   description = "The write capacity of the dynamo db table"
+  default     = 5
 }
 
 variable "hash_key" {
