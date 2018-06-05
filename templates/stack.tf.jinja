@@ -1,0 +1,15 @@
+module "opsworks_stack" "stack" {
+  source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack"
+
+  stack_name         = "{{ config["stack"]["name"] }}"
+  full_name          = "{{ config["stack"]["full_name"] }}"
+  environment        = "{{ config["environment"] }}"
+  region             = "{{ config["region"] }}"
+  vpc_id             = "${module.vpc.vpc.id}"
+  default_subnet_id  = "${module.vpc.subnets.public.ids[0]}"
+  chef_version       = "12"
+  cookbooks_url      = "git@github.com:EdisonJunior/ring-cookbooks-12.git"
+  cookbooks_revision = ""
+
+  custom_json = "{}"
+}

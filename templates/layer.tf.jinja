@@ -1,0 +1,36 @@
+module "{{ layer["name"] }}" {
+  source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-layer"
+
+  name       = "{{ layer["name"] }}"
+  stack_id   = "${module.opsworks_stack.stack_id}"
+  stack_name = "${module.opsworks_stack.stack_name}"
+
+  # ASG
+  min_size             = {{ layer["min_instance_count"][environment] }}
+  max_size             = {{ layer["max_instance_count"][environment] }}
+  subnets              = "${module.vpc.subnets.public.ids}"
+  iam_instance_profile = "${module.opsworks_stack.default_instance_profile}"
+  image_id             = "${var.image_id}"
+  instance_type        = "{{ layer["instance_type"] }}"
+  key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
+
+  # Layer
+  short_name = "${format("%s-%s", "{{ layer["name"] }}", var.app_version)}"
+
+  security_groups = [
+    "${module.vpc.aws_security_group.allow_all_within_vpc.id}",
+  ]
+
+  assign_public_ips = {{ "true" if layer["elb"]["internet_facing"] else "false" }}
+  use_ebs           = {{ "true" if "ebs_volume_size" in layer else "false" }}
+
+  custom_setup_recipes     = "${local.custom_setup_recipes}"
+  custom_configure_recipes = "${local.custom_configure_recipes}"
+  custom_deploy_recipes    = "${local.custom_deploy_recipes}"
+  custom_shutdown_recipes  = "${local.custom_shutdown_recipes}"
+
+  custom_json = <<EOF
+  {
+  }
+EOF
+}

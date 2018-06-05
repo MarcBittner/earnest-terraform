@@ -1,0 +1,52 @@
+terraform {
+  backend "s3" {
+    bucket         = "ring-terraform-states"
+    key            = "implementations/{{ config["stack"]["name"] }}"
+    region         = "us-east-1"
+    profile        = "ring-it"
+    dynamodb_table = "ring-terraform_lock_table"
+  }
+}
+
+locals {
+  env = "{{ config["environment"] }}"
+
+  # Recipes
+  custom_setup_recipes = [
+    "ring-devops::tag_instance",
+    "ring-devops::datadog",
+    "{{ config["stack"]["name"] }}",
+    "ring-devops::route53_update_cname",
+    "ring-data-mgmt::security-logs",
+    "ring-devops::lambda_logger",
+    "ring-devops::logrotate",
+    "ring-devops::cronjobs",
+    "ring-data-mgmt::filebeat-agent",
+    "ring-security::qualys",
+  ]
+
+  custom_configure_recipes = [
+    "ring-devops::riemann",
+    "ring-devops::lambda_logger",
+    "ring-socket-service::healthcheck",
+  ]
+
+  custom_deploy_recipes = [
+    "{{ config["stack"]["name"] }}::deploy",
+    "ring-devops::lambda_logger",
+  ]
+
+  custom_shutdown_recipes = [
+    "ring-devops::route53_update_cname",
+    "ring-devops::lambda_logger",
+  ]
+}
+
+provider "aws" {
+  profile = "${module.generic-data.environment-profile-mapping[local.env]}"
+  region  = "${module.generic-data.region}"
+}
+
+module "generic-data" {
+  source = "git@github.com:EdisonJunior/terraform-infra//modules/generic-data"
+}
