@@ -1,6 +1,6 @@
 module "vpc" {
   source    = "git@github.com:EdisonJunior/terraform-infra//modules/base-vpc"
-  name      = "{{ module["stack"]["name"] }}-${terraform.workspace}-vpc"
+  name      = "{{ module["name"] }}-${terraform.workspace}-vpc"
   region    = "{{ module["region"] }}"
   cidr_base = "{{ module["cidr_base"] }}"
 }
