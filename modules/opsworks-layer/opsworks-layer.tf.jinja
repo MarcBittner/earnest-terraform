@@ -6,8 +6,8 @@ module "{{ module["name"] }}" {
   stack_name = "${module.opsworks_stack.stack_name}"
 
   # ASG
-  min_size             = {{ module["min_instance_count"][environment] }}
-  max_size             = {{ module["max_instance_count"][environment] }}
+  min_size             = {{ module["min_instance_count"] }}
+  max_size             = {{ module["max_instance_count"] }}
   subnets              = "${module.vpc.subnets.public.ids}"
   iam_instance_profile = "${module.opsworks_stack.default_instance_profile}"
   image_id             = "${var.image_id}"
