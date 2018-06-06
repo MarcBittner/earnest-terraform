@@ -2,7 +2,7 @@ resource "aws_security_group" "${var.name}" {
   name = "{{ module["name"] }}"
   vpc_id = "${module.vpc.vpc.id}"
 
-{% for rule in egress_rules %}
+{% for rule in ingress_rules %}
   ingress {
     from_port       = rule["from_port"]
     to_port         = rule["to_port"]
