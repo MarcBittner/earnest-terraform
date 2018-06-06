@@ -10,7 +10,6 @@ module "{{ module["name"] }}" {
   max_size             = {{ module["max_instance_count"] }}
   subnets              = "${module.vpc.subnets.public.ids}"
   iam_instance_profile = "${module.opsworks_stack.default_instance_profile}"
-  image_id             = "${var.image_id}"
   instance_type        = "{{ module["instance_type"] }}"
   key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
 
