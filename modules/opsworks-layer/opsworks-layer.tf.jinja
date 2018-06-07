@@ -1,26 +1,26 @@
-module "{{ module["global_config"]["name"] }}" {
+module "{{ data["global_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-layer"
 
-  name       = "{{ module["global_config"]["name"] }}"
+  name       = "{{ data["global_config"]["name"] }}"
   stack_id   = "${module.opsworks_stack.stack_id}"
   stack_name = "${module.opsworks_stack.stack_name}"
 
   # ASG
-  min_size             = {{ module["module_config"]["min_instance_count"] }}
-  max_size             = {{ module["module_config"]["max_instance_count"] }}
+  min_size             = {{ data["module_config"]["min_instance_count"] }}
+  max_size             = {{ data["module_config"]["max_instance_count"] }}
   subnets              = "${module.vpc.subnets.public.ids}"
   iam_instance_profile = "${module.opsworks_stack.default_instance_profile}"
-  instance_type        = "{{ module["module_config"]["instance_type"] }}"
+  instance_type        = "{{ data["module_config"]["instance_type"] }}"
   key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
 
   # Layer
-  short_name = "${format("%s-%s", "{{ module["global_config"]["name"] }}", var.app_version)}"
+  short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", var.app_version)}"
 
   security_groups = [
     "${module.vpc.aws_security_group.allow_all_within_vpc.id}",
   ]
 
-  assign_public_ips = {{ "true" if module["module_config"]["elb"]["internet_facing"] else "false" }}
+  assign_public_ips = {{ "true" if data["module_config"]["elb"]["internet_facing"] else "false" }}
   use_ebs           = {{ "true" if "ebs_volume_size" in layer else "false" }}
 
   custom_setup_recipes     = "${local.custom_setup_recipes}"
