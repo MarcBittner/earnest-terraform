@@ -15,6 +15,8 @@ resource "aws_nat_gateway" "nat_gateway" {
 }
 
 resource "aws_route" "private_nat" {
+  count = "${var.region-az-count-mapping[var.region]}"
+
   route_table_id         = "${aws_route_table.private.*.id[count.index]}"
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = "${aws_nat_gateway.nat_gateway.*.id[count.index]}"
