@@ -1,6 +1,24 @@
+#ami
+#data "aws_ami" "vmx_ami" {
+#  most_recent      = true
+#
+#  filter {
+#    name   = "owner-alias"
+#    values = ["amazon"]
+#  }
+#
+#  filter {
+#    name   = "name"
+#    values = ["amzn-ami-vpc-nat*"]
+#  }
+#
+#  name_regex = "^myami-\\d{3}"
+#  owners     = ["self"]
+#}
+
 #Instance
 resource "aws_instance" "meraki_vmx" {
-  ami                    = "ami-4952cd29"
+  ami                    = "ami-bd50c8ab"
   vpc_security_group_ids = ["${data.terraform_remote_state.vpc.aws_security_group.allow_all.id}"]
   instance_type          = "m4.large"
   subnet_id              = "${data.terraform_remote_state.vpc.subnets.public.ids[2]}"

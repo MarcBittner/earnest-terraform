@@ -27,6 +27,12 @@ variable "number-to-letter-mapping" {
 
 variable "cidr_base" {}
 
+variable "account_id" {}
+
+variable "is_leaf_hub" {
+  default = false
+}
+
 variable "region" {
   default = "us-east-1"
 }

@@ -20,6 +20,17 @@ variable "environment-region-mapping" {
   }
 }
 
+variable "environment-account-mapping" {
+  type = "map"
+
+  default = {
+    "corp" = "774154506888"
+    "dev"  = "630825982732"
+    "qa"   = "qa-ring"
+    "prod" = "prod-ring"
+  }
+}
+
 variable "environment-short-to-long-name-mapping" {
   type = "map"
 

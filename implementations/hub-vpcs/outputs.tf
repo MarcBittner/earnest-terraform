@@ -9,3 +9,7 @@ output "subnets.public.ids" {
 output "subnets.private.ids" {
   value = "${module.vpc.subnets.private.ids}"
 }
+
+output "aws_vpc.id" {
+  value = "${module.vpc.vpc.id}"
+}
