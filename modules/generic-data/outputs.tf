@@ -29,3 +29,7 @@ output "region-elb-account-mapping" {
 output "elb-logs-bucket" {
   value = "${var.elb-logs-bucket}"
 }
+
+output "region-az-count-mapping"{
+  value = "${var.region-az-count-mapping}"
+}

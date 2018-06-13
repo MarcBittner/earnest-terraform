@@ -1,21 +1,3 @@
-#ami
-#data "aws_ami" "vmx_ami" {
-#  most_recent      = true
-#
-#  filter {
-#    name   = "owner-alias"
-#    values = ["amazon"]
-#  }
-#
-#  filter {
-#    name   = "name"
-#    values = ["amzn-ami-vpc-nat*"]
-#  }
-#
-#  name_regex = "^myami-\\d{3}"
-#  owners     = ["self"]
-#}
-
 #Instance
 resource "aws_instance" "meraki_vmx" {
   ami                    = "ami-bd50c8ab"
@@ -43,4 +25,28 @@ resource "aws_instance" "meraki_vmx" {
 resource "aws_eip" "meraki_vmx_eip" {
   instance = "${aws_instance.meraki_vmx.id}"
   vpc      = true
+}
+
+#############################################
+# Local Routes
+#############################################
+
+resource "aws_route" "public_vmx" {
+  route_table_id            = "${data.terraform_remote_state.vpc.aws_route_table.public.id}"
+  destination_cidr_block    = "10.0.0.0/8"
+  instance_id = "${aws_instance.meraki_vmx.id}"
+}
+
+resource "aws_route" "private_vmx" {
+  count = "${module.generic-data.region-az-count-mapping[local.region]}"
+
+  route_table_id            = "${data.terraform_remote_state.vpc.aws_route_table.private.ids[count.index]}"
+  destination_cidr_block    = "10.0.0.0/8"
+  instance_id = "${aws_instance.meraki_vmx.id}"
+}
+
+resource "aws_route" "fort_knox_vmx" {
+  route_table_id            = "${data.terraform_remote_state.vpc.aws_route_table.fortknox.id}"
+  destination_cidr_block    = "10.0.0.0/8"
+  instance_id = "${aws_instance.meraki_vmx.id}"
 }
