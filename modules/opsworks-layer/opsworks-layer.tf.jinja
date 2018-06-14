@@ -1,4 +1,4 @@
-module "{{ data["global_config"]["name"] }}" {
+module "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-layer"
 
   name       = "{{ data["global_config"]["name"] }}"
