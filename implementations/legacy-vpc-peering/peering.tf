@@ -10,7 +10,7 @@ resource "aws_vpc_peering_connection" "old_prod_peering_connection" {
   peer_vpc_id   = "vpc-65835100"
   vpc_id        = "${data.terraform_remote_state.corp_vpc.aws_vpc.id}"
   auto_accept   = false
-  peer_owner_id = "774154506888"
+  peer_owner_id = "890452240102"
   peer_region   = "us-east-1"
 }
 

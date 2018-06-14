@@ -1,9 +1,9 @@
 variable "old-prod-public-route-tables" {
-  default = []
+  default = ["rtb-99ab7bfc","rtb-9bab7bfe"]
 }
 
 variable "old-prod-private-route-tables" {
-  default = ["rtb-99ab7bfc"]
+  default = []
 }
 
 variable "old-prod-cidr" {
