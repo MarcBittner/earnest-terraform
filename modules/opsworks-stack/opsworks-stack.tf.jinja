@@ -2,6 +2,7 @@ module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack"
 
   stack_name         = "{{ data["global_config"]["name"] }}"
+  full_name          = "{{ data["global_config"]["name"] }}"
   environment        = "{{ data["global_config"]["environment"] }}"
   region             = "{{ data["global_config"]["region"] }}"
   vpc_id             = "${module.vpc.vpc.id}"
@@ -9,6 +10,6 @@ module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   chef_version       = "12"
   cookbooks_url      = "git@github.com:EdisonJunior/ring-cookbooks-12.git"
   cookbooks_revision = ""
-
+  image_id = "c0ff6fef"
   custom_json = "{}"
 }

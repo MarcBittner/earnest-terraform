@@ -14,7 +14,7 @@ module "{{ data["module_config"]["name"] }}" {
   key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
 
   # Layer
-  short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", var.app_version)}"
+  short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", {{ data["global_config"]["version"] }} )}"
 
   security_groups = [
     "${module.vpc.aws_security_group.allow_all_within_vpc.id}",
