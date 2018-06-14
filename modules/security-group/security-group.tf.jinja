@@ -1,0 +1,35 @@
+resource "aws_security_group" "{{ module["name"] }}" {
+  name = "{{ module["name"] }}"
+  vpc_id = "${module.vpc.vpc.id}"
+
+{% for rule in {{ module["ingress_rules"] }} %}
+  ingress {
+    from_port       = rule["from_port"]
+    to_port         = rule["to_port"]
+    protocol        = rule["protocol"]
+    cidr_blocks     = rule["cidr_blocks"]
+    security_group  = rule["security_group"]
+  }
+{% endfor %}
+
+{% for rule in {{ module["egress_rule"] }} %}
+  egress {
+    from_port       = rule["from_port"]
+    to_port         = rule["to_port"]
+    protocol        = rule["protocol"]
+    cidr_blocks     = rule["cidr_blocks"]
+    security_groups = rule["security_groups"]
+  }
+{% endfor %}
+
+  lifecycle {
+    create_before_destroy = true
+  }
+  tags {
+    Name = "{{ module["name"] }}"
+  }
+}
+
+output "id" {
+  value = "${aws_security_group.{{ module["name"] }}.id}"
+}
