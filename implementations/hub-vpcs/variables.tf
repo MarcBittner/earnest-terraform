@@ -10,3 +10,15 @@ variable "environment-cidr-mapping" {
   }
 }
 
+variable "external-allow-all-cidrs" {
+  type = "map"
+
+  default {
+    "corp-us-east-1"  = ["172.16.0.0/16"]
+    "dev-us-east-1"   = [] 
+    "qa-us-east-1"    = [] 
+    "stage-us-east-1" = [] 
+    "prod-us-east-1"  = [] 
+  }
+}
+

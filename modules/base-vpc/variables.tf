@@ -1,3 +1,7 @@
+variable "external-allow-all-cidrs" {
+  default = []
+}
+
 variable "region-az-count-mapping" {
   type = "map"
 

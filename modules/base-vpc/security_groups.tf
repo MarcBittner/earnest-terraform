@@ -52,6 +52,33 @@ output "aws_security_group.allow_all_within_vpc.id" {
   value = "${aws_security_group.allow_all_within_vpc.id}"
 }
 
+###########################################################################
+#allow all from cloud cidrs
+resource "aws_security_group" "allow_all_within_cloud" {
+  name        = "${terraform.workspace}-allow_all_within_cloud"
+  description = "Allow all inbound traffic from all ring cloud cidrs"
+  vpc_id      = "${aws_vpc.this.id}"
+
+  ingress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["${compact(distinct(concat(list(aws_vpc.this.cidr_block), var.external-allow-all-cidrs)))}"]
+  }
+
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["${compact(distinct(concat(list(aws_vpc.this.cidr_block), var.external-allow-all-cidrs)))}"]
+  }
+}
+
+#OUTPUTS
+output "aws_security_group.allow_all_within_cloud.id" {
+  value = "${aws_security_group.allow_all_within_cloud.id}"
+}
+
 #########################################################################
 resource "aws_security_group" "qualys_sg" {
   name   = "qualys-sg"
