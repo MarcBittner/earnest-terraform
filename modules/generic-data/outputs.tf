@@ -6,6 +6,10 @@ output "environment-region-mapping" {
   value = "${var.environment-region-mapping}"
 }
 
+output "environment-account-mapping" {
+  value = "${var.environment-account-mapping}"
+}
+
 output "environment-short-to-long-name-mapping" {
   value = "${var.environment-short-to-long-name-mapping}"
 }
@@ -24,4 +28,8 @@ output "region-elb-account-mapping" {
 
 output "elb-logs-bucket" {
   value = "${var.elb-logs-bucket}"
+}
+
+output "region-az-count-mapping"{
+  value = "${var.region-az-count-mapping}"
 }

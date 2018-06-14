@@ -20,6 +20,17 @@ variable "environment-region-mapping" {
   }
 }
 
+variable "environment-account-mapping" {
+  type = "map"
+
+  default = {
+    "corp" = "774154506888"
+    "dev"  = "630825982732"
+    "qa"   = "qa-ring"
+    "prod" = "prod-ring"
+  }
+}
+
 variable "environment-short-to-long-name-mapping" {
   type = "map"
 
@@ -57,3 +68,18 @@ variable "region-elb-account-mapping" {
 variable "elb-logs-bucket" {
   default = "ring-it-elb-logs"
 }
+
+variable "region-az-count-mapping" {
+  type = "map"
+
+  default = {
+    "us-west-1"    = 3
+    "us-west-2"    = 3
+    "us-east-1"    = 6
+    "us-east-2"    = 3
+    "eu-west-1"    = 3
+    "eu-west-2"    = 3
+    "eu-central-1" = 3
+  }
+}
+
