@@ -1,11 +1,11 @@
 variable "old-prod-public-route-tables" {
-  default = ["blah", "blah"]
+  default = []
 }
 
 variable "old-prod-private-route-tables" {
-  default = ["blah", "blah"]
+  default = ["rtb-99ab7bfc"]
 }
 
-varialbe "old-prod-cidr" {
-  default = "x.x.x.x/16"
+variable "old-prod-cidr" {
+  default = "172.16.0.0/16"
 }
