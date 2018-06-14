@@ -1,10 +1,9 @@
 module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack"
 
-  stack_name         = "{{ data["module_config"]["name"] }}"
-  stack_name         = "{{ data["module_config"]["name"] }}"
+  stack_name         = "{{ data["global_config"]["name"] }}"
   environment        = "{{ data["global_config"]["environment"] }}"
-  region             = "{{ data["gloabl_config"]["region"] }}"
+  region             = "{{ data["global_config"]["region"] }}"
   vpc_id             = "${module.vpc.vpc.id}"
   default_subnet_id  = "${module.vpc.subnets.public.ids[0]}"
   chef_version       = "12"
