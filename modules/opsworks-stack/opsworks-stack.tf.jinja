@@ -10,6 +10,5 @@ module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   chef_version       = "12"
   cookbooks_url      = "git@github.com:EdisonJunior/ring-cookbooks-12.git"
   cookbooks_revision = ""
-  image_id = "c0ff6fef"
   custom_json = "{}"
 }

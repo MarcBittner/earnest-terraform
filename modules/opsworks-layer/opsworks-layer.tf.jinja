@@ -13,6 +13,8 @@ module "{{ data["module_config"]["name"] }}" {
   instance_type        = "{{ data["module_config"]["instance_type"] }}"
   key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
 
+  image_id = "c0ff6fef"
+
   # Layer
   short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", "{{ data["global_config"]["version"] }}" )}"
 
