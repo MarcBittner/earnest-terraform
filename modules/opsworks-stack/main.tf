@@ -141,7 +141,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "instance_role_policy" {
-  name_prefix = "${substr(format("%s%sInstanceRolePolicy", join("",split(" ",var.full_name)), title(var.environment)), 0, 32}"
+  name_prefix = "${substr(format("%s%sInstanceRolePolicy", join("",split(" ",var.full_name)), title(var.environment)), 0, 32)}"
   role        = "${aws_iam_role.default_instance_role.id}"
 
   policy = <<EOF
