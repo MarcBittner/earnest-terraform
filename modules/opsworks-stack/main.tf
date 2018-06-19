@@ -116,12 +116,12 @@ EOF
 }
 
 resource "aws_iam_instance_profile" "default_instance_profile" {
-  name_prefix = "${format("%s%sInstanceProfile", join("",split(" ",var.full_name)), title(var.environment))}"
+  name_prefix = "${substr(format("%s%sInstanceProfile", join("",split(" ",var.full_name)), title(var.environment)), 0, 32)}"
   role        = "${aws_iam_role.default_instance_role.name}"
 }
 
 resource "aws_iam_role" "default_instance_role" {
-  name_prefix = "${format("%s%sInstanceRole", join("",split(" ",var.full_name)), title(var.environment))}"
+  name_prefix = "${substr(format("%s%sInstanceRole", join("",split(" ",var.full_name)), title(var.environment)), 0 ,32)}"
 
   assume_role_policy = <<EOF
 {
@@ -141,7 +141,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "instance_role_policy" {
-  name_prefix = "${format("%s%sInstanceRolePolicy", join("",split(" ",var.full_name)), title(var.environment))}"
+  name_prefix = "${substr(format("%s%sInstanceRolePolicy", join("",split(" ",var.full_name)), title(var.environment)), 0, 32}"
   role        = "${aws_iam_role.default_instance_role.id}"
 
   policy = <<EOF
