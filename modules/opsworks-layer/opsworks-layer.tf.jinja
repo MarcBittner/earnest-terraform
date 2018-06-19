@@ -1,7 +1,7 @@
 module "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-layer"
 
-  name       = "{{ data["global_config"]["name"] }}"
+  name       = "{{ data["global_config"]["layer_prefix"] }}-{{ data["module_config"]["name"] }}"
   stack_id   = "${module.opsworks_stack.stack_id}"
   stack_name = "${module.opsworks_stack.stack_name}"
 
