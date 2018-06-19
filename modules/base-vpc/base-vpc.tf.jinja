@@ -3,5 +3,5 @@ module "vpc" {
   name       = "{{ data["global_config"]["name"] }}-${terraform.workspace}-vpc"
   region     = "{{ data["global_config"]["region"] }}"
   cidr_base  = "{{ data["global_config"]["cidr_base"] }}"
-  account_id = "{module.generic-data.environment-account-mapping["{{ data["global_config"]["environment"]}}"]}"
+  account_id = "${module.generic-data.environment-account-mapping["{{ data["global_config"]["environment"]}}"]}"
 }
