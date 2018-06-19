@@ -1,5 +1,10 @@
 module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
+  {% if data["global_config"]["module_branch"] == "master" -%}
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack"
+  {% else -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack?ref={{data["global_config"]["module_branch"]}}"
+  {-% endif %}
+  
 
   stack_name         = "{{ data["global_config"]["name"] }}"
   full_name          = "{{ data["global_config"]["name"] }}"
