@@ -3,7 +3,7 @@ module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack"
   {% else -%}
     source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-stack?ref={{data["global_config"]["module_branch"]}}"
-  {-% endif %}
+  {% endif %}
   
 
   stack_name         = "{{ data["global_config"]["name"] }}"
