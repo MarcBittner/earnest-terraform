@@ -6,5 +6,5 @@ module "{{ data["module_config"]["name"] }}" {
   {% endif %}
 
   name              = "{{ data["module_config"]["name"] }}"
-  enable_versioning = {{ data["module_config"]["enable_versioning"] }}
+  enable_versioning = {{ false if data["module_config"]["enable_versioning"] == False else true }}
 }
