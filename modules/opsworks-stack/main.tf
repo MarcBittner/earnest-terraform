@@ -173,7 +173,8 @@ resource "aws_iam_role_policy" "instance_role_policy" {
         "ec2:DescribeTags",
         "ec2:CreateTags",
         "iam:CreateGroup",
-        "iam:CreateUser"
+        "iam:CreateUser",
+        "iam:AddUserToGroup"
       ],
       "Effect": "Allow",
       "Resource": "*"
