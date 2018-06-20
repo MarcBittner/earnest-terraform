@@ -14,6 +14,6 @@ module "opsworks_stack" "{{ data["module_config"]["name"] }}" {
   default_subnet_id  = "${module.vpc.subnets.public.ids[0]}"
   chef_version       = "12"
   cookbooks_url      = "git@github.com:EdisonJunior/ring-cookbooks-12.git"
-  cookbooks_revision = ""
+  cookbooks_revision = "rss-tf"
   custom_json = "{}"
 }
