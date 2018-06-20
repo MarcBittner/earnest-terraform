@@ -175,7 +175,8 @@ resource "aws_iam_role_policy" "instance_role_policy" {
         "iam:CreateGroup",
         "iam:CreateUser",
         "iam:AddUserToGroup",
-        "iam:PutUserPolicy"
+        "iam:PutUserPolicy",
+        "iam:CreateAccessKey"
       ],
       "Effect": "Allow",
       "Resource": "*"
