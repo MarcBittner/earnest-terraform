@@ -1,5 +1,9 @@
 module "{{ data["module_config"]["name"] }}" {
+  {% if data["global_config"]["module_branch"] == "master" -%}
   source = "git@github.com:EdisonJunior/terraform-infra//modules/redis-cluster"
+  {% else -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/redis-cluster?ref={{data["global_config"]["module_branch"]}}"
+  {% endif %}
 
   name              = "{{ data["module_config"]["name"] }}-{{ data["global_config"]["environment"] }}"
   environment       = "{{ data["global_config"]["environment"] }}"
@@ -8,6 +12,5 @@ module "{{ data["module_config"]["name"] }}" {
   qualsys_sg_id     = "${module.vpc.aws_security_group.qualys_sg.id}"
 
   node_type = "{{ data["module_config"]["node_type"] }}"
-
   node_count = {{ data["module_config"]["node_count"] }}
 }
