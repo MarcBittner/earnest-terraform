@@ -33,12 +33,12 @@ resource "aws_elasticache_replication_group" "redis" {
 
   cluster_mode {
     replicas_per_node_group = 2
-    num_node_groups         = "${var.node_count[var.environment]}"
+    num_node_groups         = "${var.node_count}"
   }
 
   automatic_failover_enabled = true
 
-  node_type            = "${var.node_type[var.environment]}"
+  node_type            = "${var.node_type}"
   parameter_group_name = "${var.parameter_group_name}"
   port                 = "6379"
   subnet_group_name    = "${var.subnet_group_name}"

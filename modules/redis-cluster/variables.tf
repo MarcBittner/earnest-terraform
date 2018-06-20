@@ -29,11 +29,11 @@ variable "replicas_per_shard" {
 variable "subnet_group_name" {}
 
 variable "node_type" {
-  type = "map"
+  default = "cache.m3.medium"
 }
 
 variable "node_count" {
-  type = "map"
+  default = 1
 }
 
 variable "maintenance_window" {
