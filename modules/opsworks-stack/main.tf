@@ -172,7 +172,8 @@ resource "aws_iam_role_policy" "instance_role_policy" {
         "opsworks:DescribeStackProvisioningParameters",
         "ec2:DescribeTags",
         "ec2:CreateTags",
-        "iam:CreateGroup"
+        "iam:CreateGroup",
+        "iam:CreateUser"
       ],
       "Effect": "Allow",
       "Resource": "*"
