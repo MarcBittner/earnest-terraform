@@ -16,7 +16,7 @@ module "{{ data["module_config"]["name"] }}" {
   image_id = "{{ data["module_config"]["image_id"] }}"
 
   # Layer
-  short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", "{{ data["global_config"]["version"] }}" )}"
+  short_name = "${format("%s-%s", "{{ data["module_config"]["name"] }}", "{{ data["global_config"]["version"] }}" )}"
 
   security_groups = [
     "${module.vpc.aws_security_group.allow_all_within_vpc.id}",
