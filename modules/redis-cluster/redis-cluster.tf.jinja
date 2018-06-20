@@ -1,4 +1,4 @@
-module "{{ data["module_config"]["name"] }}" {
+module "{{ data["module_config"]["name"] }}-redis" {
   {% if data["global_config"]["module_branch"] == "master" -%}
   source = "git@github.com:EdisonJunior/terraform-infra//modules/redis-cluster"
   {% else -%}
