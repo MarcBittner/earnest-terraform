@@ -1,0 +1,10 @@
+module "{{ data["module_config"]["name"] }}" {
+  {% if data["global_config"]["module_branch"] == "master" -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/bucket"
+  {% else -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/bucket?ref={{data["global_config"]["module_branch"]}}"
+  {% endif %}
+
+  name              = "{{ data["module_config"]["name"] }}"
+  enable_versioning = {{ "false" if data["module_config"]["enable_versioning"] == False else "true" }}
+}
