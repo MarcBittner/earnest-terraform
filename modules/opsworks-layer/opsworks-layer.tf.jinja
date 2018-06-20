@@ -31,7 +31,41 @@ module "{{ data["module_config"]["name"] }}" {
   custom_shutdown_recipes  = "${local.custom_shutdown_recipes}"
 
   custom_json = <<EOF
-  {
+{
+  "{{ data["global_config"]["name"] }}": {
+    "deploy": {
+      "branch": "master"
+    },
+    "nginx": {
+      "server_name": "{{ data["module_config"]["name"] }}.{{ data["global_config"]["environment"] }}.ring.net",
+      "redis_server": "${module.{{ data["module_config"]["name"]}}-redis.redis_endpoint}",
+      "consul_host":  "consul.{{ data["global_config"]["environment"] }}",
+      "socket_service": "{{ data["module_config"]["name"] }}"
+    }
+  },
+  "ring-data-mgmt": {
+    "logstash-agent": {
+      "logs_tag": "{{ data["module_config"]["name"] }}-socket-service",
+      "logs_path": "/var/log/nginx/error.log"
+    },
+    "filebeat-agent": {
+      "tags": ["{{ data["module_config"]["name"] }}-socket-service"]
+    }
+  },
+  "ring-devops": {
+    "cronjobs": [
+      "0 */2 * * * root /usr/sbin/logrotate /etc/logrotate.conf"
+    ],
+    "tag_instance_with": {
+      "Env": "{{ data["global_config"]["environment"] }}",
+      "Roles": "app,{{ data["module_config"]["name"] }}",
+      "Project": "{{ data["global_config"]["name"] }}"
+    },
+    "datadog": {
+      "api_key": "${trimspace(data.aws_ssm_parameter.datadog_api_key.value)}",
+      "dogstreams": "/var/log/nginx/datadog.log"
+    }
   }
+}
 EOF
 }
