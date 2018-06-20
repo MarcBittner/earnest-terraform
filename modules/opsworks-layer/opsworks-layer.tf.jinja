@@ -39,7 +39,7 @@ module "{{ data["module_config"]["name"] }}" {
     "nginx": {
       "server_name": "{{ data["module_config"]["name"] }}.{{ data["global_config"]["environment"] }}.ring.net",
       "redis_server": "${module.{{ data["module_config"]["name"]}}-redis.redis_endpoint}",
-      "consul_host":  "consul.{{ data["global_config"]["environment"] }}",
+      "consul_host":  "consul.{{ data["global_config"]["environment"] }}.ring.com",
       "socket_service": "{{ data["module_config"]["name"] }}"
     }
   },
