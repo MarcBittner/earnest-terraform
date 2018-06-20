@@ -1,0 +1,21 @@
+module "{{ data["module_config"]["name"] }}-redis" {
+  {% if data["global_config"]["module_branch"] == "master" -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/redis-cluster"
+  {% else -%}
+    source = "git@github.com:EdisonJunior/terraform-infra//modules/redis-cluster?ref={{data["global_config"]["module_branch"]}}"
+  {% endif %}
+
+  name              = "{{ data["module_config"]["name"] }}-{{ data["global_config"]["environment"] }}"
+  environment       = "{{ data["global_config"]["environment"] }}"
+  vpc_id            = "${module.vpc.vpc.id}"
+  subnet_group_name = "${module.vpc.aws_elasticache_subnet_group.fortknox_elasticache.id}"
+  qualsys_sg_id     = "${module.vpc.aws_security_group.qualys_sg.id}"
+
+  {% if data["module_config"]["node_type"] != None -%}
+    node_type = "{{ data["module_config"]["node_type"] }}"
+  {% endif %}
+
+  {% if data["module_config"]["node_count"] != None -%}
+    node_count = {{ data["module_config"]["node_count"] }}
+  {% endif %}
+}

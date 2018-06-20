@@ -1,7 +1,7 @@
 module "{{ data["module_config"]["name"] }}" {
   source = "git@github.com:EdisonJunior/terraform-infra//modules/opsworks-layer"
 
-  name       = "{{ data["global_config"]["name"] }}"
+  name       = "{{ data["global_config"]["layer_prefix"] }}-{{ data["module_config"]["name"] }}"
   stack_id   = "${module.opsworks_stack.stack_id}"
   stack_name = "${module.opsworks_stack.stack_name}"
 
@@ -13,10 +13,10 @@ module "{{ data["module_config"]["name"] }}" {
   instance_type        = "{{ data["module_config"]["instance_type"] }}"
   key_name             = "devops-debug"                                      # TODO REMOVE BEFORE DEPLOY TO PROD
 
-  image_id = "c0ff6fef"
+  image_id = "{{ data["module_config"]["image_id"] }}"
 
   # Layer
-  short_name = "${format("%s-%s", "{{ data["global_config"]["name"] }}", "{{ data["global_config"]["version"] }}" )}"
+  short_name = "${format("%s-%s", "{{ data["module_config"]["name"] }}", "{{ data["global_config"]["version"] }}" )}"
 
   security_groups = [
     "${module.vpc.aws_security_group.allow_all_within_vpc.id}",
@@ -31,7 +31,41 @@ module "{{ data["module_config"]["name"] }}" {
   custom_shutdown_recipes  = "${local.custom_shutdown_recipes}"
 
   custom_json = <<EOF
-  {
+{
+  "{{ data["global_config"]["name"] }}": {
+    "deploy": {
+      "branch": "master"
+    },
+    "nginx": {
+      "server_name": "{{ data["module_config"]["name"] }}.{{ data["global_config"]["environment"] }}.ring.net",
+      "redis_server": "${module.{{ data["module_config"]["name"]}}-redis.redis_endpoint}",
+      "consul_host":  "consul.{{ data["global_config"]["environment"] }}.ring.com",
+      "socket_service": "{{ data["module_config"]["name"] }}"
+    }
+  },
+  "ring-data-mgmt": {
+    "logstash-agent": {
+      "logs_tag": "{{ data["module_config"]["name"] }}-socket-service",
+      "logs_path": "/var/log/nginx/error.log"
+    },
+    "filebeat-agent": {
+      "tags": ["{{ data["module_config"]["name"] }}-socket-service"]
+    }
+  },
+  "ring-devops": {
+    "cronjobs": [
+      "0 */2 * * * root /usr/sbin/logrotate /etc/logrotate.conf"
+    ],
+    "tag_instance_with": {
+      "Env": "{{ data["global_config"]["environment"] }}",
+      "Roles": "app,{{ data["module_config"]["name"] }}",
+      "Project": "{{ data["global_config"]["name"] }}"
+    },
+    "datadog": {
+      "api_key": "${trimspace(data.aws_ssm_parameter.datadog_api_key.value)}",
+      "dogstreams": "/var/log/nginx/datadog.log"
+    }
   }
+}
 EOF
 }
