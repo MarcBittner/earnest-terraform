@@ -6,6 +6,10 @@ variable "image_id" {
   description = "The AMI Id for the launch configuration"
 }
 
+variable "user_data" {
+  description = "The user data for the launch configuration"
+}
+
 variable "instance_type" {
   description = "The AWS instance type the service should be created with i.e. c5.large"
 }
@@ -16,6 +20,7 @@ variable "iam_instance_profile" {
 
 variable "max_size" {
   description = "ASG max instance count"
+  default     = 1
 }
 
 variable "min_size" {
@@ -26,12 +31,4 @@ variable "min_size" {
 variable "subnets" {
   description = "List of subnets for ASG"
   type        = "list"
-}
-
-variable "stack_name" {
-  description = "Name of stack the ASG layer belongs to"
-}
-
-variable "enabled" {
-  default = 1
 }
