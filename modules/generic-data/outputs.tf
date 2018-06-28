@@ -34,6 +34,10 @@ output "region-az-count-mapping" {
   value = "${var.region-az-count-mapping}"
 }
 
+output "number-to-letter-mapping" {
+  value = "${var.number-to-letter-mapping}"
+}
+
 output "environment-vpc-id-mapping" {
   value = "${var.environment-vpc-id-mapping}"
 }
