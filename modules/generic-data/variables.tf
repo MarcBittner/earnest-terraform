@@ -31,6 +31,22 @@ variable "environment-account-mapping" {
   }
 }
 
+variable "environment-vpc-id-mapping" {
+  type = "map"
+
+  default = {
+    "dev" = "vpc-fbd2f49e"
+  }
+}
+
+variable "vpc-id-cidr-base-mapping" {
+  type = "map"
+
+  default = {
+    "vpc-fbd2f49e" = "172.30"
+  }
+}
+
 variable "environment-short-to-long-name-mapping" {
   type = "map"
 
@@ -82,4 +98,3 @@ variable "region-az-count-mapping" {
     "eu-central-1" = 3
   }
 }
-

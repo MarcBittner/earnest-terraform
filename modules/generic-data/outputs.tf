@@ -30,6 +30,14 @@ output "elb-logs-bucket" {
   value = "${var.elb-logs-bucket}"
 }
 
-output "region-az-count-mapping"{
+output "region-az-count-mapping" {
   value = "${var.region-az-count-mapping}"
+}
+
+output "environment-vpc-id-mapping" {
+  value = "${var.environment-vpc-id-mapping}"
+}
+
+output "vpc-id-cidr-base-mapping" {
+  value = "${var.vpc-id-cidr-base-mapping}"
 }
