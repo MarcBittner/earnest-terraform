@@ -8,6 +8,7 @@ resource "aws_launch_configuration" "launch_config" {
   ebs_optimized               = false
   associate_public_ip_address = true
   security_groups             = ["${var.security_groups}"]
+  key_name                    = "${var.ssh_key_name}"
 
   lifecycle {
     create_before_destroy = true

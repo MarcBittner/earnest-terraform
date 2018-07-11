@@ -38,3 +38,8 @@ variable "security_groups" {
   type        = "list"
   default     = []
 }
+
+variable "ssh_key_name" {
+  description = "The ssh key name for the private key to ssh into ASG instances"
+  default     = ""
+}
