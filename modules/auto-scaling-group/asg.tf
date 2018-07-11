@@ -24,6 +24,10 @@ resource "aws_autoscaling_group" "asg" {
 
   depends_on = ["aws_launch_configuration.launch_config"]
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = [
     {
       key                 = "project_name"
