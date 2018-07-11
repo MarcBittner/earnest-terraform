@@ -14,19 +14,19 @@ locals {
 }
 
 provider "aws" {
-  alias = "corp"
+  alias   = "corp"
   profile = "ring-it"
   region  = "${local.region}"
 }
 
 provider "aws" {
-  alias = "old-prod"
+  alias   = "old-prod"
   profile = "ring-old-prod"
   region  = "${local.region}"
 }
 
 provider "aws" {
-  alias = "old-dev"
+  alias   = "old-dev"
   profile = "ring-old-prod"
   region  = "${local.region}"
 }

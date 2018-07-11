@@ -2,8 +2,6 @@
 # OLD PROD Peering + Routes
 #############################################
 
-
-
 resource "aws_vpc_peering_connection" "old_prod_peering_connection" {
   provider = "aws.corp"
 
@@ -30,7 +28,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
 
 resource "aws_route" "old-prod_public" {
   provider = "aws.old-prod"
-  count = "${length(var.old-prod-public-route-tables)}"
+  count    = "${length(var.old-prod-public-route-tables)}"
 
   route_table_id            = "${var.old-prod-public-route-tables[count.index]}"
   destination_cidr_block    = "${data.terraform_remote_state.corp_vpc.cidr}.0.0/16"
@@ -39,7 +37,7 @@ resource "aws_route" "old-prod_public" {
 
 resource "aws_route" "old-prod_private" {
   provider = "aws.old-prod"
-  count = "${length(var.old-prod-private-route-tables)}"
+  count    = "${length(var.old-prod-private-route-tables)}"
 
   route_table_id            = "${var.old-prod-private-route-tables[count.index]}"
   destination_cidr_block    = "${data.terraform_remote_state.corp_vpc.cidr}.0.0/16"
@@ -60,7 +58,7 @@ resource "aws_route" "corp_public" {
 
 resource "aws_route" "corp_private" {
   provider = "aws.corp"
-  count = "${length(data.terraform_remote_state.corp_vpc.aws_route_table.private.ids)}"
+  count    = "${length(data.terraform_remote_state.corp_vpc.aws_route_table.private.ids)}"
 
   route_table_id            = "${data.terraform_remote_state.corp_vpc.aws_route_table.private.ids[count.index]}"
   destination_cidr_block    = "${var.old-prod-cidr}"

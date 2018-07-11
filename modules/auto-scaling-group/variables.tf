@@ -32,3 +32,9 @@ variable "subnets" {
   description = "List of subnets for ASG"
   type        = "list"
 }
+
+variable "security_groups" {
+  description = "The IDs of the security groups to attach to the ASG launch configuration"
+  type        = "list"
+  default     = []
+}

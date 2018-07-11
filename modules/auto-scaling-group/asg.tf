@@ -7,6 +7,7 @@ resource "aws_launch_configuration" "launch_config" {
   enable_monitoring           = true
   ebs_optimized               = false
   associate_public_ip_address = true
+  security_groups             = ["${var.security_groups}"]
 
   lifecycle {
     create_before_destroy = true

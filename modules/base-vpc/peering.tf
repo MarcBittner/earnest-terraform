@@ -9,8 +9,8 @@ resource "aws_vpc_peering_connection" "peering_connection" {
 }
 
 resource "aws_vpc_peering_connection_accepter" "peer" {
-  count         = "${var.is_leaf_hub == true ? 1 : 0}"
- 
+  count = "${var.is_leaf_hub == true ? 1 : 0}"
+
   provider                  = "aws.corp"
   vpc_peering_connection_id = "${aws_vpc_peering_connection.peering_connection.id}"
   auto_accept               = true
@@ -55,7 +55,7 @@ resource "aws_route" "public_hub_to_local" {
 
 resource "aws_route" "private_nat_hub" {
   provider = "aws.corp"
-  count = "${var.is_leaf_hub == true ? var.region-az-count-mapping[var.region] : 0}"
+  count    = "${var.is_leaf_hub == true ? var.region-az-count-mapping[var.region] : 0}"
 
   route_table_id            = "${data.terraform_remote_state.corp_vpc.aws_route_table.private.ids[count.index]}"
   destination_cidr_block    = "${var.cidr_base}.0.0/16"
