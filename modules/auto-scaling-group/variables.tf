@@ -43,3 +43,18 @@ variable "ssh_key_name" {
   description = "The ssh key name for the private key to ssh into ASG instances"
   default     = ""
 }
+
+variable "healthcheck_type" {
+  description = "Either ELB or EC2"
+  default     = "EC2"
+}
+
+variable "healthcheck_grace_period" {
+  description = "Time it takes after instance spins up before checking health"
+  default     = 180
+}
+
+variable "load_balancer_name" {
+  description = "Name of load balancer to assign to the ASG"
+  default     = ""
+}
