@@ -46,7 +46,7 @@ variable "interval" {
   default = 30
 }
 
-variable "internal_load_balancer" {
+variable "is_internal_load_balancer" {
   default = true
 }
 
