@@ -28,3 +28,7 @@ resource "aws_elb" "elb" {
     Name = "${var.name}"
   }
 }
+
+output "name" {
+  value = "${aws_elb.elb.name}"
+}
