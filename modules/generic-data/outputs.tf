@@ -45,3 +45,7 @@ output "environment-vpc-id-mapping" {
 output "vpc-id-cidr-base-mapping" {
   value = "${var.vpc-id-cidr-base-mapping}"
 }
+
+output "env-to-ssl-cert-arn" {
+  value = "${var.env-to-ssl-cert-arn}"
+}

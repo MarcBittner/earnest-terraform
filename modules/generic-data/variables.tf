@@ -111,3 +111,11 @@ variable "number-to-letter-mapping" {
     "5" = "f"
   }
 }
+
+variable "env-to-ssl-cert-arn" {
+  type = "map"
+
+  default = {
+    "dev" = "arn:aws:acm:us-east-1:613225557329:certificate/863ed1ff-7e30-4853-87d5-01d3c24a0964"
+  }
+}
