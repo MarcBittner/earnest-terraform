@@ -52,4 +52,5 @@ variable "internal_load_balancer" {
 
 variable "logging_bucket" {
   description = "The S3 bucket to send access logs to"
+  default = "ring-it-elb-logs"
 }
