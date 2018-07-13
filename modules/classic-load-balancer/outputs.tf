@@ -1,5 +1,5 @@
 output "dns_name" {
-  value = "${aws_elb.elb.name}"
+  value = "${aws_elb.elb.dns_name}"
 }
 
 output "zone_id" {
