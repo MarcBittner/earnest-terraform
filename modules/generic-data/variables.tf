@@ -119,3 +119,11 @@ variable "env-to-ssl-cert-arn" {
     "dev" = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
   }
 }
+
+variable "env-to-dns-suffix" {
+  type = "map"
+
+  default = {
+    "dev" = "dev.ring.net."
+  }
+}
