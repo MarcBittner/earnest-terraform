@@ -49,3 +49,7 @@ output "vpc-id-cidr-base-mapping" {
 output "env-to-ssl-cert-arn" {
   value = "${var.env-to-ssl-cert-arn}"
 }
+
+output "env-to-dns-suffix" {
+  value = "${var.env-to-dns-suffix}"
+}
