@@ -53,3 +53,7 @@ output "env-to-ssl-cert-arn-mapping" {
 output "env-to-dns-suffix-mapping" {
   value = "${var.env-to-dns-suffix-mapping}"
 }
+
+output "env-to-dns-hosted-zone-mapping" {
+  value = "${var.env-to-dns-hosted-zone-mapping}"
+}

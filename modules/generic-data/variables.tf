@@ -127,3 +127,11 @@ variable "env-to-dns-suffix-mapping" {
     "dev" = "dev.ring.net."
   }
 }
+
+variable "env-to-dns-hosted-zone-mapping" {
+  type = "map"
+
+  default = {
+    "dev" = "Z3E5ZY2M39OYQR"
+  }
+}
