@@ -112,7 +112,7 @@ variable "number-to-letter-mapping" {
   }
 }
 
-variable "env-to-ssl-cert-arn" {
+variable "env-to-ssl-cert-arn-mapping" {
   type = "map"
 
   default = {
@@ -120,7 +120,7 @@ variable "env-to-ssl-cert-arn" {
   }
 }
 
-variable "env-to-dns-suffix" {
+variable "env-to-dns-suffix-mapping" {
   type = "map"
 
   default = {

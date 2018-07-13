@@ -46,10 +46,10 @@ output "vpc-id-cidr-base-mapping" {
   value = "${var.vpc-id-cidr-base-mapping}"
 }
 
-output "env-to-ssl-cert-arn" {
+output "env-to-ssl-cert-arn-mapping" {
   value = "${var.env-to-ssl-cert-arn}"
 }
 
-output "env-to-dns-suffix" {
-  value = "${var.env-to-dns-suffix}"
+output "env-to-dns-suffix-mapping" {
+  value = "${var.env-to-dns-suffix-mapping}"
 }
