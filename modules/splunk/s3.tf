@@ -29,7 +29,12 @@ data "aws_iam_policy_document" "splunk_s3_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com", "${data.aws_elb_service_account.main.arn}", "${data.aws_billing_service_account.main.arn}"]
+      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com"]
+    }
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${data.aws_elb_service_account.main.arn}", "${data.aws_billing_service_account.main.arn}"]
     }
 
     actions = ["s3:GetBucketAcl"]
@@ -42,7 +47,12 @@ data "aws_iam_policy_document" "splunk_s3_policy" {
 
     principals {
       type        = "Service"
-      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com", "${data.aws_elb_service_account.main.arn}", "${data.aws_billing_service_account.main.arn}"]
+      identifiers = ["cloudtrail.amazonaws.com", "config.amazonaws.com"]
+    }
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${data.aws_elb_service_account.main.arn}", "${data.aws_billing_service_account.main.arn}"]
     }
 
     actions = ["s3:PutObject"]

@@ -26,7 +26,7 @@ module "splunk" {
 
 resource "aws_elb" "test-elb" {
   name               = "test-elb"
-  availability_zones = ["us-east-1"]
+  availability_zones = ["us-east-1a"]
 
   access_logs {
     bucket        = "${module.splunk.s3_log_bucket_id}"
