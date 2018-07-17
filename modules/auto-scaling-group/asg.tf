@@ -32,6 +32,16 @@ resource "aws_autoscaling_group" "asg" {
     create_before_destroy = true
   }
 
+  enabled_metrics = ["GroupMinSize",
+    "GroupMaxSize",
+    "GroupDesiredCapacity",
+    "GroupInServiceInstances",
+    "GroupPendingInstances",
+    "GroupStandbyInstances",
+    "GroupTerminatingInstances",
+    "GroupTotalInstances",
+  ]
+
   tags = [
     {
       key                 = "Name"
