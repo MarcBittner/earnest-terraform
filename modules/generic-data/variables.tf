@@ -111,3 +111,27 @@ variable "number-to-letter-mapping" {
     "5" = "f"
   }
 }
+
+variable "env-to-ssl-cert-arn-mapping" {
+  type = "map"
+
+  default = {
+    "dev" = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
+  }
+}
+
+variable "env-to-dns-suffix-mapping" {
+  type = "map"
+
+  default = {
+    "dev" = "dev.ring.net."
+  }
+}
+
+variable "env-to-dns-hosted-zone-mapping" {
+  type = "map"
+
+  default = {
+    "dev" = "Z3E5ZY2M39OYQR"
+  }
+}

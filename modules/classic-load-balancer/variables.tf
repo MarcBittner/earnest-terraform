@@ -46,10 +46,11 @@ variable "interval" {
   default = 30
 }
 
-variable "internal_load_balancer" {
+variable "is_internal_load_balancer" {
   default = true
 }
 
 variable "logging_bucket" {
   description = "The S3 bucket to send access logs to"
+  default     = "ring-it-elb-logs"
 }

@@ -45,3 +45,15 @@ output "environment-vpc-id-mapping" {
 output "vpc-id-cidr-base-mapping" {
   value = "${var.vpc-id-cidr-base-mapping}"
 }
+
+output "env-to-ssl-cert-arn-mapping" {
+  value = "${var.env-to-ssl-cert-arn-mapping}"
+}
+
+output "env-to-dns-suffix-mapping" {
+  value = "${var.env-to-dns-suffix-mapping}"
+}
+
+output "env-to-dns-hosted-zone-mapping" {
+  value = "${var.env-to-dns-hosted-zone-mapping}"
+}

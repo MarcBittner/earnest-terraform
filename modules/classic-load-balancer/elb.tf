@@ -10,7 +10,7 @@ resource "aws_elb" "elb" {
     interval      = 5
   }
 
-  internal                    = "${var.internal_load_balancer}"
+  internal                    = "${var.is_internal_load_balancer}"
   listener                    = "${var.listeners}"
   idle_timeout                = "${var.idle_timeout}"
   connection_draining         = "${var.connection_draining}"
@@ -27,4 +27,8 @@ resource "aws_elb" "elb" {
   tags {
     Name = "${var.name}"
   }
+}
+
+output "name" {
+  value = "${aws_elb.elb.name}"
 }
