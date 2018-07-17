@@ -8,28 +8,28 @@
 */
 
 resource "aws_sns_topic" "splunk_cloudtrail_sns" {
-  name         = "splunk_cloudtrail_sns"
-  display_name = "splunk_cloudtrail_sns"
+  name         = "sec-ct"
+  display_name = "sec-ct"
 }
 
 resource "aws_sns_topic" "splunk_cloudfront_sns" {
-  name         = "splunk_cloudfront_sns"
-  display_name = "splunk_cloudfront_sns"
+  name         = "sec-cf"
+  display_name = "sec-cf"
 }
 
 resource "aws_sns_topic" "splunk_config_sns" {
-  name         = "splunk_config_sns"
-  display_name = "splunk_config_sns"
+  name         = "sec-config"
+  display_name = "config"
 }
 
 resource "aws_sns_topic" "splunk_elb_sns" {
-  name         = "splunk_elb_sns"
-  display_name = "splunk_elb_sns"
+  name         = "sec-elb"
+  display_name = "sec-elb"
 }
 
 resource "aws_sns_topic" "splunk_s3access_sns" {
-  name         = "splunk_s3access_sns"
-  display_name = "splunk_s3access_sns"
+  name         = "sec-s3access"
+  display_name = "sec-s3access"
 }
 
 resource "aws_sns_topic_subscription" "splunk_cloudtrail" {
@@ -80,5 +80,83 @@ data "aws_iam_policy_document" "splunk_cloudtrail" {
     actions = ["SNS:Publish"]
 
     resources = ["${aws_sns_topic.splunk_cloudtrail_sns.arn}"]
+  }
+}
+
+resource "aws_sns_topic_policy" "splunk_cloudfront" {
+  arn = "${aws_sns_topic.splunk_cloudfront_sns.arn}"
+
+  policy = "${data.aws_iam_policy_document.splunk_cf.json}"
+}
+
+data "aws_iam_policy_document" "splunk_cf" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["s3.amazonaws.com"]
+    }
+
+    actions = ["SNS:Publish"]
+
+    resources = ["${aws_sns_topic.splunk_cloudfront_sns.arn}"]
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+
+      values = ["${aws_s3_bucket.splunk_s3.arn}"]
+    }
+  }
+}
+
+resource "aws_sns_topic_policy" "splunk_elb" {
+  arn = "${aws_sns_topic.splunk_elb_sns.arn}"
+
+  policy = "${data.aws_iam_policy_document.splunk_elb.json}"
+}
+
+data "aws_iam_policy_document" "splunk_elb" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["s3.amazonaws.com"]
+    }
+
+    actions = ["SNS:Publish"]
+
+    resources = ["${aws_sns_topic.splunk_elb_sns.arn}"]
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+
+      values = ["${aws_s3_bucket.splunk_s3.arn}"]
+    }
+  }
+}
+
+resource "aws_sns_topic_policy" "splunk_s3" {
+  arn = "${aws_sns_topic.splunk_s3access_sns.arn}"
+
+  policy = "${data.aws_iam_policy_document.splunk_s3.json}"
+}
+
+data "aws_iam_policy_document" "splunk_s3" {
+  statement {
+    principals {
+      type        = "Service"
+      identifiers = ["s3.amazonaws.com"]
+    }
+
+    actions = ["SNS:Publish"]
+
+    resources = ["${aws_sns_topic.splunk_s3access_sns.arn}"]
+
+    condition {
+      test     = "ArnLike"
+      variable = "aws:SourceArn"
+
+      values = ["${aws_s3_bucket.splunk_s3.arn}"]
+    }
   }
 }

@@ -81,6 +81,11 @@ resource "aws_sqs_queue_policy" "splunk_cloudtrail" {
 
 data "aws_iam_policy_document" "aws_cloudtrail_send_policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
     actions = ["sqs:SendMessage"]
 
     resources = ["${aws_sqs_queue.splunk_cloudtrail_queue.arn}"]
@@ -101,6 +106,11 @@ resource "aws_sqs_queue_policy" "splunk_cloudfront" {
 
 data "aws_iam_policy_document" "aws_cloudfront_send_policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
     actions = ["sqs:SendMessage"]
 
     resources = ["${aws_sqs_queue.splunk_cloudfront_queue.arn}"]
@@ -121,6 +131,11 @@ resource "aws_sqs_queue_policy" "splunk_config" {
 
 data "aws_iam_policy_document" "aws_config_send_policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
     actions = ["sqs:SendMessage"]
 
     resources = ["${aws_sqs_queue.splunk_config_queue.arn}"]
@@ -141,6 +156,11 @@ resource "aws_sqs_queue_policy" "splunk_elb" {
 
 data "aws_iam_policy_document" "aws_elb_send_policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
     actions = ["sqs:SendMessage"]
 
     resources = ["${aws_sqs_queue.splunk_elb_queue.arn}"]
@@ -161,6 +181,11 @@ resource "aws_sqs_queue_policy" "splunk_s3access" {
 
 data "aws_iam_policy_document" "aws_s3access_send_policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
     actions = ["sqs:SendMessage"]
 
     resources = ["${aws_sqs_queue.splunk_s3access_queue.arn}"]
