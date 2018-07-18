@@ -120,7 +120,7 @@ variable "env-to-ssl-cert-arn-mapping" {
   default = {
     "dev"  = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
     "qa"   = ""
-    "prod" = ""
+    "prod" = "arn:aws:acm:us-east-1:890452240102:certificate/e802ee17-8ba2-4913-a304-a6a1e563cbc2"
   }
 }
 
