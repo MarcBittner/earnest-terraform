@@ -144,11 +144,20 @@ variable "env-to-dns-hosted-zone-mapping" {
   }
 }
 
-variable "vpc-to-internet-gateway-id-mapping" {
+variable "vpc-id-to-internet-gateway-id-mapping" {
   type = "map"
 
   default = {
     "vpc-fbd2f49e" = "igw-75127610"
     "vpc-65835100" = "igw-ccec12a9"
+  }
+}
+
+variable "vpc-id-to-security-group-mapping" {
+  type = "map"
+
+  default = {
+    "vpc-fbd2f49e" = "sg-e61d2d82"
+    "vpc-65835100" = "sg-329eda57"
   }
 }
