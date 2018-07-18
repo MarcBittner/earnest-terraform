@@ -144,7 +144,7 @@ variable "env-to-dns-hosted-zone-mapping" {
   }
 }
 
-variable "vpc-to-internet-gateway-id" {
+variable "vpc-to-internet-gateway-id-mapping" {
   type = "map"
 
   default = {
