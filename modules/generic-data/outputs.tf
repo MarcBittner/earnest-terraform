@@ -57,3 +57,11 @@ output "env-to-dns-suffix-mapping" {
 output "env-to-dns-hosted-zone-mapping" {
   value = "${var.env-to-dns-hosted-zone-mapping}"
 }
+
+output "vpc-id-to-internet-gateway-id-mapping" {
+  value = "${var.vpc-id-to-internet-gateway-id-mapping}"
+}
+
+output "vpc-id-to-security-group-mapping" {
+  value = "${var.vpc-id-to-security-group-mapping}"
+}
