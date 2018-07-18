@@ -143,3 +143,12 @@ variable "env-to-dns-hosted-zone-mapping" {
     "prod" = "Z3H7ZFJEXP3Q4H"
   }
 }
+
+variable "vpc-to-gateway-id" {
+  type = "map"
+
+  default = {
+    "vpc-fbd2f49e" = "igw-75127610"
+    "vpc-65835100" = "igw-ccec12a9"
+  }
+}
