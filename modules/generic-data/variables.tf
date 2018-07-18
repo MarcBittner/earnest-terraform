@@ -27,7 +27,7 @@ variable "environment-account-mapping" {
     "corp" = "774154506888"
     "dev"  = "630825982732"
     "qa"   = "qa-ring"
-    "prod" = "prod-ring"
+    "prod" = "doorbot"
   }
 }
 
@@ -35,7 +35,8 @@ variable "environment-vpc-id-mapping" {
   type = "map"
 
   default = {
-    "dev" = "vpc-fbd2f49e"
+    "dev"  = "vpc-fbd2f49e"
+    "prod" = "vpc-65835100"
   }
 }
 
@@ -44,6 +45,7 @@ variable "vpc-id-cidr-base-mapping" {
 
   default = {
     "vpc-fbd2f49e" = "172.30"
+    "vpc-65835100" = "172.16"
   }
 }
 
@@ -116,7 +118,9 @@ variable "env-to-ssl-cert-arn-mapping" {
   type = "map"
 
   default = {
-    "dev" = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
+    "dev"  = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
+    "qa"   = ""
+    "prod" = ""
   }
 }
 
@@ -124,7 +128,9 @@ variable "env-to-dns-suffix-mapping" {
   type = "map"
 
   default = {
-    "dev" = "dev.ring.net."
+    "dev"  = "dev.ring.net."
+    "qa"   = "qa.ring.net."
+    "prod" = "prod.ring.net."
   }
 }
 
@@ -132,6 +138,8 @@ variable "env-to-dns-hosted-zone-mapping" {
   type = "map"
 
   default = {
-    "dev" = "Z3E5ZY2M39OYQR"
+    "dev"  = "Z3E5ZY2M39OYQR"
+    "qa"   = ""
+    "prod" = "Z3H7ZFJEXP3Q4H"
   }
 }
