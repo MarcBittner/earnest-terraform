@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "launch_config" {
-  name_prefix                 = "${var.name}"
+  name_prefix                 = "${format("%s-%s", var.environment, var.name)}"
   image_id                    = "${var.image_id}"
   instance_type               = "${var.instance_type}"
   iam_instance_profile        = "${var.iam_instance_profile}"

@@ -2,6 +2,10 @@ variable "name" {
   description = "The project name"
 }
 
+variable "environment" {
+  description = "The environment the ASG is in"
+}
+
 variable "image_id" {
   description = "The AMI Id for the launch configuration"
 }
