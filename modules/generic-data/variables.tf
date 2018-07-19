@@ -36,6 +36,7 @@ variable "environment-vpc-id-mapping" {
 
   default = {
     "dev"  = "vpc-fbd2f49e"
+    "qa"   = "vpc-adf7b0cb"
     "prod" = "vpc-65835100"
   }
 }
@@ -45,6 +46,7 @@ variable "vpc-id-cidr-base-mapping" {
 
   default = {
     "vpc-fbd2f49e" = "172.30"
+    "vpc-adf7b0cb" = "10.3"
     "vpc-65835100" = "172.16"
   }
 }
@@ -119,7 +121,7 @@ variable "env-to-ssl-cert-arn-mapping" {
 
   default = {
     "dev"  = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
-    "qa"   = ""
+    "qa"   = "arn:aws:acm:us-east-1:613225557329:certificate/3be6741a-1f68-4e82-9a28-9be01cfba88f"
     "prod" = "arn:aws:acm:us-east-1:890452240102:certificate/e802ee17-8ba2-4913-a304-a6a1e563cbc2"
   }
 }
@@ -139,7 +141,7 @@ variable "env-to-dns-hosted-zone-mapping" {
 
   default = {
     "dev"  = "Z3E5ZY2M39OYQR"
-    "qa"   = ""
+    "qa"   = "Z1UFFBKG22RQQ8"
     "prod" = "Z3H7ZFJEXP3Q4H"
   }
 }
@@ -148,8 +150,9 @@ variable "vpc-id-to-internet-gateway-id-mapping" {
   type = "map"
 
   default = {
-    "vpc-fbd2f49e" = "igw-75127610"
-    "vpc-65835100" = "igw-ccec12a9"
+    "vpc-fbd2f49e" = "igw-75127610" # Dev
+    "vpc-adf7b0cb" = "igw-6c744e0b" # QA
+    "vpc-65835100" = "igw-ccec12a9" # Prod
   }
 }
 
@@ -157,7 +160,8 @@ variable "vpc-id-to-security-group-mapping" {
   type = "map"
 
   default = {
-    "vpc-fbd2f49e" = "sg-e61d2d82"
-    "vpc-65835100" = "sg-329eda57"
+    "vpc-fbd2f49e" = "sg-e61d2d82" # Dev
+    "vpc-adf7b0cb" = "sg-21e33a5e" # QA
+    "vpc-65835100" = "sg-329eda57" # Prod
   }
 }
