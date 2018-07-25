@@ -165,3 +165,13 @@ variable "vpc-id-to-security-group-mapping" {
     "vpc-65835100" = "sg-329eda57" # Prod
   }
 }
+
+variable "env-to-consul-mapping" {
+  "type" = "map"
+
+  default = {
+    "dev"  = "consul.dev.ring.com:8500"
+    "qa"   = "consul.qa.ring.com:8500"
+    "prod" = "consul.ring.com:8500"
+  }
+}
