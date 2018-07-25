@@ -58,6 +58,10 @@ output "env-to-dns-hosted-zone-mapping" {
   value = "${var.env-to-dns-hosted-zone-mapping}"
 }
 
+output "env-to-consul-mapping" {
+  value = "${var.env-to-consul-mapping}"
+}
+
 output "vpc-id-to-internet-gateway-id-mapping" {
   value = "${var.vpc-id-to-internet-gateway-id-mapping}"
 }
