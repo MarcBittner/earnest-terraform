@@ -17,6 +17,7 @@ resource "aws_launch_configuration" "launch_config" {
 
 resource "aws_autoscaling_group" "asg" {
   name                 = "asg-${aws_launch_configuration.launch_config.name}"
+  desired_capacity     = "${var.desired_count}"
   max_size             = "${var.max_size}"
   min_size             = "${var.min_size}"
   launch_configuration = "${aws_launch_configuration.launch_config.name}"

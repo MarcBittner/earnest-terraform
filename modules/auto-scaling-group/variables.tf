@@ -32,6 +32,11 @@ variable "min_size" {
   default     = 1
 }
 
+variable "desired_count" {
+  description = "ASG desired instance count"
+  default     = 1
+}
+
 variable "subnets" {
   description = "List of subnets for ASG"
   type        = "list"
