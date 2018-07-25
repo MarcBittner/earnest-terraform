@@ -166,7 +166,7 @@ variable "vpc-id-to-security-group-mapping" {
   }
 }
 
-varialbe "env-to-consul-mapping" {
+variable "env-to-consul-mapping" {
   "type" = "map"
 
   default = {
