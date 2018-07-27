@@ -20,6 +20,16 @@ variable "environment-region-mapping" {
   }
 }
 
+variable "environment-account-id-mapping" {
+  type = "map"
+
+  default = {
+    "dev"  = "613225557329"
+    "qa"   = "613225557329"
+    "prod" = ""
+  }
+}
+
 variable "environment-account-mapping" {
   type = "map"
 

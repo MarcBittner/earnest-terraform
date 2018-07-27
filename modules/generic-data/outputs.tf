@@ -10,6 +10,10 @@ output "environment-account-mapping" {
   value = "${var.environment-account-mapping}"
 }
 
+output "environment-account-id-mapping" {
+  value = "${var.environment-account-id-mapping}"
+}
+
 output "environment-short-to-long-name-mapping" {
   value = "${var.environment-short-to-long-name-mapping}"
 }
