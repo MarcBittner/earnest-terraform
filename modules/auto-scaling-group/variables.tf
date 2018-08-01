@@ -37,6 +37,11 @@ variable "desired_count" {
   default     = 1
 }
 
+variable "wait_for_elb_capacity" {
+  description = "The desired instances that passes the ELB healthcheck (on creation and updates of ASG)"
+  default     = 1
+}
+
 variable "subnets" {
   description = "List of subnets for ASG"
   type        = "list"

@@ -26,6 +26,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type         = "${var.healthcheck_type}"
   health_check_grace_period = "${var.healthcheck_grace_period}"
   load_balancers            = ["${var.load_balancer_name}"]
+  wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
 
   depends_on = ["aws_launch_configuration.launch_config"]
 
