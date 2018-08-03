@@ -28,7 +28,7 @@ resource "aws_autoscaling_group" "asg" {
   load_balancers            = ["${var.load_balancer_name}"]
   wait_for_elb_capacity     = "${var.wait_for_elb_capacity}"
 
-  depends_on = ["${concat(["aws_launch_configuration.launch_config"], var.dependencies)}"]
+  depends_on = ["${aws_launch_configuration.launch_config}"]
 
   lifecycle {
     create_before_destroy = true
