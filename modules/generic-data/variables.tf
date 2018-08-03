@@ -185,3 +185,13 @@ variable "env-to-consul-mapping" {
     "prod" = "consul.ring.com:8500"
   }
 }
+
+variable "env-to-jumpbox-mapping" {
+  "type" = "map"
+
+  default = {
+    "dev"  = "sg-d17af2a6"
+    "qa"   = "sg-540c8423"
+    "prod" = "sg-7b4cc40c"
+  }
+}
