@@ -72,3 +72,9 @@ variable "load_balancer_name" {
   description = "Name of load balancer to assign to the ASG"
   default     = ""
 }
+
+variable "dependencies" {
+  description = "The dependencies the ASG has"
+  type        = "list"
+  default     = []
+}
