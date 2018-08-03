@@ -74,6 +74,6 @@ output "vpc-id-to-security-group-mapping" {
   value = "${var.vpc-id-to-security-group-mapping}"
 }
 
-output "env-to-jumpbox-mapping" {
-  value = "${var.env-to-jumpbox-mapping}"
+output "env-to-jumpbox-security-group-mapping" {
+  value = "${var.env-to-jumpbox-security-group-mapping}"
 }

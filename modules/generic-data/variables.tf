@@ -186,7 +186,7 @@ variable "env-to-consul-mapping" {
   }
 }
 
-variable "env-to-jumpbox-mapping" {
+variable "env-to-jumpbox-security-group-mapping" {
   "type" = "map"
 
   default = {
