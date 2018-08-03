@@ -72,3 +72,8 @@ variable "load_balancer_name" {
   description = "Name of load balancer to assign to the ASG"
   default     = ""
 }
+
+variable "wait_for_capacity_timeout" {
+  description = "Time it takes to timeout if ASG does not pass healthcheck"
+  default     = "10m"
+}
