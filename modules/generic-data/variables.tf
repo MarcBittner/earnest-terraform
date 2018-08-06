@@ -195,3 +195,13 @@ variable "env-to-jumpbox-security-group-mapping" {
     "prod" = "sg-7b4cc40c"
   }
 }
+
+variable "env-to-logs-bucket-arn-mapping" {
+  "type" = "map"
+
+  default = {
+    "dev"  = "arn:aws:s3:::ring-data-lake-dev"
+    "qa"   = "arn:aws:s3:::ring-data-lake-qa"
+    "prod" = "arn:aws:s3:::ring-data-lake"
+  }
+}

@@ -77,3 +77,7 @@ output "vpc-id-to-security-group-mapping" {
 output "env-to-jumpbox-security-group-mapping" {
   value = "${var.env-to-jumpbox-security-group-mapping}"
 }
+
+output "env-to-logs-bucket-arn-mapping" {
+  value = "${var.env-to-logs-bucket-arn-mapping}"
+}
