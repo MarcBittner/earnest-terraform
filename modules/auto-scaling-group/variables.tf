@@ -58,7 +58,7 @@ variable "ssh_key_name" {
   default     = ""
 }
 
-variable "healthcheck_type" {
+variable "health_check_type" {
   description = "Either ELB or EC2"
   default     = "EC2"
 }
