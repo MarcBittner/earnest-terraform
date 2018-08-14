@@ -15,5 +15,3 @@ resource "aws_kinesis_stream" "test_stream" {
     Environment = "security"
   }
 }
-»
-
