@@ -13,8 +13,8 @@ resource "aws_kinesis_firehose_delivery_stream" "splunk-stream" {
   }
 
   splunk_configuration {
-    hec_endpoint               = "https://http-inputs-mydomain.splunkcloud.com:443"
-    hec_token                  = "51D4DA16-C61B-4F5F-8EC7-ED4301342A4A"
+    hec_endpoint               = "https://52.91.24.83:443"
+    hec_token                  = "43cdb08a-7c0f-4c26-81e5-d5f57e35aa92"
     hec_acknowledgment_timeout = 600
     hec_endpoint_type          = "Event"
     s3_backup_mode             = "FailedEventsOnly"
