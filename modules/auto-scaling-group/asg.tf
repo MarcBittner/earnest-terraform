@@ -51,5 +51,10 @@ resource "aws_autoscaling_group" "asg" {
       value               = "${var.name}"
       propagate_at_launch = true
     },
+    {
+      key                 = "Env"
+      value               = "${var.environment}"
+      propagate_at_launch = true
+    },
   ]
 }
