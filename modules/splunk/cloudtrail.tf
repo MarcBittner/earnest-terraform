@@ -1,5 +1,5 @@
 resource "aws_cloudtrail" "splunk" {
-  name                  = "ring-sec-splunk-${var.aws_account_name}-cloudtrail"
+  name                  = "${var.cloudtrail_name}"
   s3_bucket_name        = "${aws_s3_bucket.splunk_s3.id}"
   s3_key_prefix         = "cloudtrail"
   is_multi_region_trail = true
@@ -10,5 +10,5 @@ resource "aws_cloudtrail" "splunk" {
     include_management_events = true
   }
 
-  tags = "${merge(local.common_tags, map("Name", "ring-sec-splunk-${var.aws_account_name}-cloudtrail"))}"
+  tags = "${merge(local.common_tags, map("Name", "${var.cloudtrail_name}"))}"
 }

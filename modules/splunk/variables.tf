@@ -35,3 +35,13 @@ variable "vpc_ids" {
   description = "List of VPCs ID that you want flow log enabled for."
   type        = "list"
 }
+
+variable "cloudtrail_name" {
+  description = "Cloudtrail name that be configured for splunk"
+  type        = "string"
+}
+
+variable "config_name" {
+  description = "Config name that be configured for splunk. Default config name is default"
+  type        = "string"
+}
