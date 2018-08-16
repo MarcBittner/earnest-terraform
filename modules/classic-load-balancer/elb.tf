@@ -26,6 +26,6 @@ resource "aws_elb" "elb" {
 
   tags {
     Name = "${var.name}"
-    Env = "${var.environment}"
+    Env  = "${var.environment}"
   }
 }
