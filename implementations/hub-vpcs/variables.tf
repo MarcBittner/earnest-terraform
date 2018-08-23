@@ -7,6 +7,8 @@ variable "environment-cidr-mapping" {
     "qa-us-east-1"    = "10.92"
     "stage-us-east-1" = "10.93"
     "prod-us-east-1"  = "10.94"
+    "stg2-us-east-1" = "10.96"
+    "release-us-east-1" = "10.97"
   }
 }
 
@@ -19,5 +21,7 @@ variable "external-allow-all-cidrs" {
     "qa-us-east-1"    = []
     "stage-us-east-1" = []
     "prod-us-east-1"  = []
+    "stg2-us-east-1" = []
+    "release-us-east-1" = []
   }
 }
