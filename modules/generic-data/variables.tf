@@ -60,10 +60,10 @@ variable "vpc-id-cidr-base-mapping" {
   type = "map"
 
   default = {
-    "vpc-fbd2f49e" = "172.30"
-    "vpc-adf7b0cb" = "10.3"
-    "vpc-65835100" = "172.16"
-    "vpc-0141d0bc879c84e61" = "10.96"
+    "vpc-fbd2f49e" = "172.30" # Dev
+    "vpc-adf7b0cb" = "10.3" # QA
+    "vpc-65835100" = "172.16" # Prod
+    "vpc-0141d0bc879c84e61" = "10.96" # Staging2
   }
 }
 
@@ -133,14 +133,15 @@ variable "number-to-letter-mapping" {
   }
 }
 
+
+#ssl certificate arn for internal network that is *.ring.net
 variable "env-to-ssl-cert-arn-mapping" {
   type = "map"
-
   default = {
     "dev"  = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
     "qa"   = "arn:aws:acm:us-east-1:613225557329:certificate/3be6741a-1f68-4e82-9a28-9be01cfba88f"
     "prod" = "arn:aws:acm:us-east-1:890452240102:certificate/e802ee17-8ba2-4913-a304-a6a1e563cbc2"
-    "stg2" = "arn:aws:acm:us-east-1:103107774325:certificate/1246bf0b-69e0-475f-9e06-0641ade018f4"
+    "stg2" = "arn:aws:acm:us-east-1:103107774325:certificate/34bdb63e-096b-4c2a-880c-b5e07c8982f1"
   }
 }
 
@@ -173,7 +174,7 @@ variable "vpc-id-to-internet-gateway-id-mapping" {
     "vpc-fbd2f49e" = "igw-75127610" # Dev
     "vpc-adf7b0cb" = "igw-6c744e0b" # QA
     "vpc-65835100" = "igw-ccec12a9" # Prod
-    "vpc-0141d0bc879c84e61" = "igw-0c55902e06e9bdd78"
+    "vpc-0141d0bc879c84e61" = "igw-0c55902e06e9bdd78" # Staging2
   }
 }
 
@@ -184,7 +185,7 @@ variable "vpc-id-to-security-group-mapping" {
     "vpc-fbd2f49e" = "sg-e61d2d82" # Dev
     "vpc-adf7b0cb" = "sg-21e33a5e" # QA
     "vpc-65835100" = "sg-329eda57" # Prod
-    "vpc-0141d0bc879c84e61" = "sg-0b74eec0f33515de3"
+    "vpc-0141d0bc879c84e61" = "sg-0b74eec0f33515de3" # Staging2
   }
 }
 
