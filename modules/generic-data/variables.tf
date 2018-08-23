@@ -6,6 +6,7 @@ variable "environment-profile-mapping" {
     "dev"  = "dev-ring"
     "qa"   = "qa-ring"
     "prod" = "prod-ring"
+    "stg2" = "stg2-ring"
   }
 }
 
@@ -17,6 +18,7 @@ variable "environment-region-mapping" {
     "dev"  = "us-east-1"
     "qa"   = "us-east-1"
     "prod" = "us-east-1"
+    "stg2" = "us-east-1"
   }
 }
 
@@ -27,6 +29,7 @@ variable "environment-account-id-mapping" {
     "dev"  = "613225557329"
     "qa"   = "613225557329"
     "prod" = ""
+    "stg2" = "103107774325"
   }
 }
 
@@ -38,6 +41,7 @@ variable "environment-account-mapping" {
     "dev"  = "630825982732"
     "qa"   = "qa-ring"
     "prod" = "doorbot"
+    "stg2" = "103107774325"
   }
 }
 
@@ -48,6 +52,7 @@ variable "environment-vpc-id-mapping" {
     "dev"  = "vpc-fbd2f49e"
     "qa"   = "vpc-adf7b0cb"
     "prod" = "vpc-65835100"
+    "stg2" = "vpc-0141d0bc879c84e61"
   }
 }
 
@@ -58,6 +63,7 @@ variable "vpc-id-cidr-base-mapping" {
     "vpc-fbd2f49e" = "172.30"
     "vpc-adf7b0cb" = "10.3"
     "vpc-65835100" = "172.16"
+    "vpc-0141d0bc879c84e61" = "10.96"
   }
 }
 
@@ -69,6 +75,7 @@ variable "environment-short-to-long-name-mapping" {
     "dev"  = "development"
     "qa"   = "qa"
     "prod" = "production"
+    "stg2" = "staging2"
   }
 }
 
@@ -133,6 +140,7 @@ variable "env-to-ssl-cert-arn-mapping" {
     "dev"  = "arn:aws:acm:us-east-1:613225557329:certificate/50214436-8d1c-4fc4-b5cd-276913e5124b"
     "qa"   = "arn:aws:acm:us-east-1:613225557329:certificate/3be6741a-1f68-4e82-9a28-9be01cfba88f"
     "prod" = "arn:aws:acm:us-east-1:890452240102:certificate/e802ee17-8ba2-4913-a304-a6a1e563cbc2"
+    "stg2" = "arn:aws:acm:us-east-1:103107774325:certificate/1246bf0b-69e0-475f-9e06-0641ade018f4"
   }
 }
 
@@ -143,6 +151,7 @@ variable "env-to-dns-suffix-mapping" {
     "dev"  = "dev.ring.net."
     "qa"   = "qa.ring.net."
     "prod" = "prod.ring.net."
+    "stg2" = "stg2.ring.net."
   }
 }
 
@@ -153,6 +162,7 @@ variable "env-to-dns-hosted-zone-mapping" {
     "dev"  = "Z3E5ZY2M39OYQR"
     "qa"   = "Z1UFFBKG22RQQ8"
     "prod" = "Z3H7ZFJEXP3Q4H"
+    "stg2" = "Z2ZBJB0THVSSS5"
   }
 }
 
@@ -163,6 +173,7 @@ variable "vpc-id-to-internet-gateway-id-mapping" {
     "vpc-fbd2f49e" = "igw-75127610" # Dev
     "vpc-adf7b0cb" = "igw-6c744e0b" # QA
     "vpc-65835100" = "igw-ccec12a9" # Prod
+    "vpc-0141d0bc879c84e61" = "igw-0c55902e06e9bdd78"
   }
 }
 
@@ -173,6 +184,7 @@ variable "vpc-id-to-security-group-mapping" {
     "vpc-fbd2f49e" = "sg-e61d2d82" # Dev
     "vpc-adf7b0cb" = "sg-21e33a5e" # QA
     "vpc-65835100" = "sg-329eda57" # Prod
+    "vpc-0141d0bc879c84e61" = "sg-0b74eec0f33515de3"
   }
 }
 
@@ -183,6 +195,7 @@ variable "env-to-consul-mapping" {
     "dev"  = "consul.dev.ring.com:8500"
     "qa"   = "consul.qa.ring.com:8500"
     "prod" = "consul.ring.com:8500"
+    "stg2" = "consul.stg2.ring.com:8500"
   }
 }
 
@@ -193,6 +206,7 @@ variable "env-to-jumpbox-security-group-mapping" {
     "dev"  = "sg-d17af2a6"
     "qa"   = "sg-540c8423"
     "prod" = "sg-7b4cc40c"
+    "stg2" = "sg-0625368948db6da14"
   }
 }
 
@@ -203,5 +217,6 @@ variable "env-to-logs-bucket-arn-mapping" {
     "dev"  = "arn:aws:s3:::ring-data-lake-dev"
     "qa"   = "arn:aws:s3:::ring-data-lake-qa"
     "prod" = "arn:aws:s3:::ring-data-lake"
+    "stg2" = "arn:aws:s3:::ring-data-lake-stg2"
   }
 }
