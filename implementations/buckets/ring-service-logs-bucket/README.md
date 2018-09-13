@@ -1,0 +1,7 @@
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| id |  |
+
