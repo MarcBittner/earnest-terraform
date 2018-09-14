@@ -4,12 +4,15 @@ type=$1
 ds_install=$2
 install_path=$3
 class=$4
-#password=$5
+password=$5
+secret=$6
+url=$7
+
 # CLEANUP EXISTING INSTALL
 # $install_path/bash_scripts/cleanup.sh
 
 # PERFORM BASE INSTALL
-$install_path/bash_scripts/base.sh $ds_install $type $install_path #$password
+$install_path/bash_scripts/base.sh $ds_install $type $install_path $password $secret $url
 
 # DEPLOY APPLICATIONS
 for x in `grep $class $install_path/bash_scripts/config.txt`; do
