@@ -57,18 +57,72 @@ resource "aws_security_group" "splunk_default_sec_group" {
     cidr_blocks = ["104.173.11.82/32"]
   }
 
-
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  #BG: added changes to match Jon's manual security group adds.  Some of these ingress rules would be better suited for inclusion in the static ip list
+  ingress {
+    from_port   = 0
+    to_port     = 65535
+    protocol    = "tcp"
+    cidr_blocks = ["69.26.152.132/32"]
+    description = "Marc"
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["176.100.19.145/32"]
+    description = "mykyta drapatyi: Remove this if needed"
+  }
+
+  ingress {
+    from_port   = 8089
+    to_port     = 8089
+    protocol    = "tcp"
+    cidr_blocks = ["54.89.115.155/32"]
+    description = "Phantom master"
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["54.89.115.155/32"]
+    description = "phantom master"
+  }
+
+  ingress {
+    from_port   = 8000
+    to_port     = 8000
+    protocol    = "tcp"
+    cidr_blocks = ["205.251.233.179/32", "72.21.198.67/32", "205.251.233.178/32"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["69.26.152.132/32"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["217.20.170.129/32"]
+    description = "mykyta drapatyi: Kiev office Remove this if needed"
+  }
 }
 
 /* This group is meant for the splunk indexers only. */
 resource "aws_security_group" "splunk_indexer_sec_group" {
-  name        = "splunk_indexer_sec_group"
+  name = "splunk_indexer_sec_group"
 
   description = "Splunk Indexer Security Group"
   vpc_id      = "${aws_vpc.splunk_vpc.id}"
@@ -92,11 +146,11 @@ resource "aws_security_group" "splunk_indexer_sec_group" {
 
 /* This group is to manage the syslog ingress from the various meraki endpoints. */
 resource "aws_security_group" "meraki_ingress_group" {
-  name        = "splunk_meraki_ingress_group"
+  name = "splunk_meraki_ingress_group"
 
   description = "Meraki Ingress Security Group"
   vpc_id      = "${aws_vpc.splunk_vpc.id}"
-  tags = "${merge(local.common_tags, map("Name", "splunk_meraki_ingress_group"))}"
+  tags        = "${merge(local.common_tags, map("Name", "splunk_meraki_ingress_group"))}"
 
   ingress {
     description = "Meraki Cluster"
@@ -116,7 +170,7 @@ resource "aws_security_group" "splunk_ui" {
   name        = "splunk_user_interface"
   description = "Splunk Web Security Group"
   vpc_id      = "${aws_vpc.splunk_vpc.id}"
-  tags = "${merge(local.common_tags, map("Name", "splunk_user_interface"))}"
+  tags        = "${merge(local.common_tags, map("Name", "splunk_user_interface"))}"
 
   ingress {
     from_port   = 80
@@ -208,7 +262,6 @@ resource "aws_security_group" "http_forwarder" {
   }
 }
 
-
 resource "aws_security_group" "splunk_lbs" {
   name        = "splunk_lbs"
   description = "public_splunk_lb_ingress"
@@ -229,6 +282,31 @@ resource "aws_security_group" "splunk_lbs" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allows hf to receive http input"
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+// phantom
+
+resource "aws_security_group" "phantom_ingress" {
+  name        = "phantom_ingress"
+  description = "phantom_ingress"
+  vpc_id      = "${aws_vpc.splunk_vpc.id}"
+
+  tags = "${merge(local.common_tags, map("Name", "phantom_ingress"))}"
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = "${var.phantom_ingress_hosts}"
+    description = "phantom group"
   }
 
   egress {
